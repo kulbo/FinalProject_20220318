@@ -2,6 +2,7 @@ package kr.co.smartsoft.finalproject_20220318.api
 
 import android.content.Context
 import com.google.gson.GsonBuilder
+import kr.co.smartsoft.finalproject_20220318.utils.ContextUtil
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -18,7 +19,7 @@ class ServerApi {
             val intercept = Interceptor {
                 with(it) {
                     val newRequest = request().newBuilder()
-                        .addHeader("X-Http-Token", getLoginUserToken(context))
+                        .addHeader("X-Http-Token", ContextUtil.getLoginUserToken(context))
                         .build()
 
                     proceed(newRequest)
@@ -44,15 +45,4 @@ class ServerApi {
         }
         return retrofit!!
     }
-
-    private val prefName = "FinalProjectPref"
-
-    private val LOGIN_USER_TOKEN = "LOGIN_USER_TOKEN"
-
-    // token을 가져오는 함수
-    public fun getLoginUserToken(context: Context) : String {
-        val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
-        return pref.getString(LOGIN_USER_TOKEN, "")!!
-    }
-
 }
