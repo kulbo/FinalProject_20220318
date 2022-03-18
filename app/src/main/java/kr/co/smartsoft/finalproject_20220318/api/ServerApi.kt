@@ -10,39 +10,42 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
 
 class ServerApi {
-    private var retrofit: Retrofit? = null
-    private val BASE_URL = "https://keepthetime.xyz"
 
-    fun getRerofit(context: Context) : Retrofit {
+    companion object {
+        private var retrofit: Retrofit? = null
+        private val BASE_URL = "https://keepthetime.xyz"
 
-        if (retrofit == null) {
-            val intercept = Interceptor {
-                with(it) {
-                    val newRequest = request().newBuilder()
-                        .addHeader("X-Http-Token", ContextUtil.getLoginUserToken(context))
-                        .build()
+        fun getRerofit(context: Context) : Retrofit {
 
-                    proceed(newRequest)
+            if (retrofit == null) {
+                val intercept = Interceptor {
+                    with(it) {
+                        val newRequest = request().newBuilder()
+                            .addHeader("X-Http-Token", ContextUtil.getLoginUserToken(context))
+                            .build()
+
+                        proceed(newRequest)
+                    }
                 }
+
+                val myClient = OkHttpClient.Builder()
+                    .addInterceptor(intercept)
+                    .build()
+
+                val gson = GsonBuilder()
+                    .setDateFormat("yyyy-MM-dd HH:mm:ss")
+                    .registerTypeAdapter(
+                        Date::class.java,
+                        DateDeseralizer()
+                    )
+                    .create()
+                retrofit = Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .client(myClient)
+                    .build()
             }
-
-            val myClient = OkHttpClient.Builder()
-                .addInterceptor(intercept)
-                .build()
-
-            val gson = GsonBuilder()
-                .setDateFormat("yyyy-MM-dd HH:mm:ss")
-                .registerTypeAdapter(
-                    Date::class.java,
-                    DateDeseralizer()
-                )
-                .create()
-            retrofit = Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .client(myClient)
-                .build()
+            return retrofit!!
         }
-        return retrofit!!
     }
 }
