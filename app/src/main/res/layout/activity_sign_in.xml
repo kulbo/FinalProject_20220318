@@ -36,6 +36,7 @@
             android:id="@+id/edtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPassword"
             android:hint="비밀번호"/>
         <Button
             android:id="@+id/btnLogIn"
