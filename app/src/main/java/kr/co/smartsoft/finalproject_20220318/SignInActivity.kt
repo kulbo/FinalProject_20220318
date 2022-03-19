@@ -25,6 +25,11 @@ class SignInActivity : BaseActivity() {
 
     override fun setUpEvents() {
 
+        binding.btnSignUp.setOnClickListener {
+            val myIntent = Intent(mContext, SignUpActivity::class.java)
+            startActivity(myIntent)
+        }
+
         binding.btnLogIn.setOnClickListener {
             val edtId = binding.edtEmail.text.toString()
             val edtPasswd = binding.edtPassword.text.toString()
