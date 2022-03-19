@@ -70,7 +70,7 @@
             android:id="@+id/edtNickName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
+            android:singleLine="true"
             android:hint="닉네임 입력"/>
 
         <Button

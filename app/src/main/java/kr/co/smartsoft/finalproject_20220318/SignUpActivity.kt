@@ -1,9 +1,7 @@
 package kr.co.smartsoft.finalproject_20220318
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.core.widget.doAfterTextChanged
 import androidx.databinding.DataBindingUtil
 import kr.co.smartsoft.finalproject_20220318.databinding.ActivitySignUpBinding
 import kr.co.smartsoft.finalproject_20220318.datas.BasicResponse
@@ -54,11 +52,26 @@ class SignUpActivity : BaseActivity() {
 
         binding.btnSignUp.setOnClickListener {
             val inputEmail = binding.edtEmail.text.toString()
-            val inputPassword = binding.edtPassword.toString()
-            val inputNickName = binding.edtNickName.toString()
+            val inputPassword = binding.edtPassword.text.toString()
+            val inputNickName = binding.edtNickName.text.toString()
 
             if (!isDupCheck) {
                 Toast.makeText(mContext, "이메일 중복확인을 해주세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (inputEmail.length == 0) {
+                Toast.makeText(mContext, "이메일을 입력해주세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (inputPassword.length < 8) {
+                Toast.makeText(mContext, "비밀번호는 8자리 이상을 입력해주세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (inputNickName.length == 0) {
+                Toast.makeText(mContext, "이메일을 입력해주세요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
