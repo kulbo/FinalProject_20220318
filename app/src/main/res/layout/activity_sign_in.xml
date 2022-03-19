@@ -31,13 +31,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="비밀번호"/>
+            android:text="비밀번호입력"/>
         <EditText
             android:id="@+id/edtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:hint="비밀번호"/>
+            android:hint="비밀번호입력"/>
         <Button
             android:id="@+id/btnLogIn"
             android:layout_width="match_parent"
