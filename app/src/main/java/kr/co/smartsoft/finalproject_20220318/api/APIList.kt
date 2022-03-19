@@ -2,10 +2,7 @@ package kr.co.smartsoft.finalproject_20220318.api
 
 import kr.co.smartsoft.finalproject_20220318.datas.BasicResponse
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
-import retrofit2.http.PUT
+import retrofit2.http.*
 
 interface APIList {
 
@@ -16,11 +13,20 @@ interface APIList {
         @Field("password") pw: String
     ) : Call<BasicResponse>
 
+    @GET("/user/check") // 중복검사
+    fun getDupulicateCheck(
+        @Query("type") type:String,
+        @Query("value") value:String
+    ) : Call<BasicResponse>
+
+//    회원가입하기
     @FormUrlEncoded
     @PUT("/user")
     fun putRequestSignUp(
         @Field("email") email: String,
         @Field("password") pw: String,
-        @Field("nick_name") nick: String,
-    )
+        @Field("nick_name") nick: String
+    ) : Call<BasicResponse>
+
+
 }

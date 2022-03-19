@@ -1,6 +1,7 @@
 package kr.co.smartsoft.finalproject_20220318.api
 
 import android.content.Context
+import android.util.Log
 import com.google.gson.GsonBuilder
 import kr.co.smartsoft.finalproject_20220318.utils.ContextUtil
 import okhttp3.Interceptor
@@ -39,11 +40,13 @@ class ServerApi {
                         DateDeseralizer()
                     )
                     .create()
+
                 retrofit = Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(myClient)
                     .build()
+
             }
             return retrofit!!
         }
