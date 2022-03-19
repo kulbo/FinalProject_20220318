@@ -28,5 +28,9 @@ interface APIList {
         @Field("nick_name") nick: String
     ) : Call<BasicResponse>
 
+    @GET("/user") // 중복검사
+    fun getRequestMyInfo(
+    ) : Call<BasicResponse>
+
 
 }

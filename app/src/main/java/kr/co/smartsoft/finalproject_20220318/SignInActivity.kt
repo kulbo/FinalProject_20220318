@@ -53,7 +53,7 @@ class SignInActivity : BaseActivity() {
                         val br = response.body()!!
                         Toast.makeText(mContext, "${br.data.user.nick_name}님 환영합니다.", Toast.LENGTH_SHORT).show()
 
-                        // ContextUtil.setLoginUserToken(mContext, br.data.token)       // 테스트를 위해 임시로 막아놓는다.
+                        ContextUtil.setLoginUserToken(mContext, br.data.token)
 
                         val myIntent = Intent(mContext, MainActivity::class.java)
                         startActivity(myIntent)
