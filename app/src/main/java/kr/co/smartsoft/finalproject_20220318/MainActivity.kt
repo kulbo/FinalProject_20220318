@@ -3,6 +3,7 @@ package kr.co.smartsoft.finalproject_20220318
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import kr.co.smartsoft.finalproject_20220318.adapters.MainViewPager2Adapter
 import kr.co.smartsoft.finalproject_20220318.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity() {
@@ -19,6 +20,6 @@ class MainActivity : BaseActivity() {
     }
 
     override fun setValues() {
-
+        binding.mainViewPager2.adapter = MainViewPager2Adapter(this)
     }
 }
