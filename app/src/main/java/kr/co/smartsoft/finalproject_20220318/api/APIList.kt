@@ -32,5 +32,7 @@ interface APIList {
     fun getRequestMyInfo(
     ) : Call<BasicResponse>
 
+    @GET("/appointment")
+    fun getRequestAppointmentList() : Call<BasicResponse>
 
 }
