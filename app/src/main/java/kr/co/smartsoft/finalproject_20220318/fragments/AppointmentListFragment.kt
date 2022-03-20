@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import kr.co.smartsoft.finalproject_20220318.R
 import kr.co.smartsoft.finalproject_20220318.databinding.FragmentAppointmentListBinding
+import kr.co.smartsoft.finalproject_20220318.databinding.FragmentMyProfileBinding
 
 class AppointmentListFragment : BaseFragment() {
 
