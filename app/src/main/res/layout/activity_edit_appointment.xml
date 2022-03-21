@@ -71,6 +71,16 @@
                 android:layout_height="wrap_content"
                 android:hint="장소 입력"/>
 
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txtScrollHelp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </FrameLayout>
 
         </LinearLayout>
     </LinearLayout>
