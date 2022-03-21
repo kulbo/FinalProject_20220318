@@ -1,11 +1,13 @@
 package kr.co.smartsoft.finalproject_20220318.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import kr.co.smartsoft.finalproject_20220318.EditAppointmentActivity
 import kr.co.smartsoft.finalproject_20220318.R
 import kr.co.smartsoft.finalproject_20220318.adapters.AppointmentRecyclerAdapter
 import kr.co.smartsoft.finalproject_20220318.databinding.FragmentAppointmentListBinding
@@ -39,6 +41,10 @@ class AppointmentListFragment : BaseFragment() {
     }
     override fun setUpEvents() {
 
+        binding.btnMakeAppoint.setOnClickListener {
+            val myIntent = Intent(mContext, EditAppointmentActivity::class.java)
+            startActivity(myIntent)
+        }
     }
 
     override fun setValues() {
@@ -53,6 +59,7 @@ class AppointmentListFragment : BaseFragment() {
 
         getAppointmentListFromServer()
     }
+
 
     fun getAppointmentListFromServer() {
         apiList.getRequestAppointmentList().enqueue(object : Callback<BasicResponse> {
