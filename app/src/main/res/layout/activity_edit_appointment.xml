@@ -75,12 +75,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <com.naver.maps.map.MapView
+                    android:id="@+id/naverMapView"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"/>
+
                 <TextView
                     android:id="@+id/txtScrollHelp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
 
             </FrameLayout>
+
+            <Button
+                android:id="@+id/btnAppointSave"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="약속 등록하기"/>
+
 
         </LinearLayout>
     </LinearLayout>
