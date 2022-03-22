@@ -37,17 +37,19 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/txtAppointmentDate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:padding="15dp"
                     android:textColor="@color/black"
-                    android:text="약속일자"
+                    android:text="약속 일자"
                     android:textSize="16sp"
                     android:background="@drawable/light_gray_border_box"/>
 
                 <TextView
+                    android:id="@+id/txtAppointmentTime"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
