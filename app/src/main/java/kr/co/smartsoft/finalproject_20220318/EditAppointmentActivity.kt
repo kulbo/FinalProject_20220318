@@ -1,9 +1,11 @@
 package kr.co.smartsoft.finalproject_20220318
 
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.DatePicker
+import android.widget.TimePicker
 import androidx.databinding.DataBindingUtil
 import kr.co.smartsoft.finalproject_20220318.databinding.ActivityEditAppointmentBinding
 import java.text.SimpleDateFormat
@@ -23,6 +25,14 @@ class EditAppointmentActivity : BaseActivity() {
 
     override fun setUpEvents() {
 
+        setDateTime()
+    }
+
+    override fun setValues() {
+
+    }
+
+    fun setDateTime() {
         binding.txtAppointmentDate.setOnClickListener {
             val dsl = object : DatePickerDialog.OnDateSetListener {
                 override fun onDateSet(p0: DatePicker?, year: Int, month: Int, day: Int) {
@@ -39,14 +49,25 @@ class EditAppointmentActivity : BaseActivity() {
                 mSelectedDateTime.get(Calendar.MONTH),
                 mSelectedDateTime.get(Calendar.HOUR_OF_DAY)
             ).show()
-       }
+        }
 
         binding.txtAppointmentTime.setOnClickListener {
+            val tsl = object : TimePickerDialog.OnTimeSetListener{
+                override fun onTimeSet(p0: TimePicker?, hour: Int, minute: Int) {
+                    mSelectedDateTime.set(Calendar.HOUR_OF_DAY, hour)
+                    mSelectedDateTime.set(Calendar.MINUTE, minute)
+                    val sdf = SimpleDateFormat("a h시 m분")
+                    binding.txtAppointmentTime.text = sdf.format(mSelectedDateTime.time)
+                }
+            }
 
+            val tpd = TimePickerDialog(
+                mContext,
+                tsl,
+                12,
+                0,
+                false
+            ).show()
         }
-    }
-
-    override fun setValues() {
-
     }
 }
