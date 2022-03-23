@@ -45,4 +45,9 @@ interface APIList {
         @Field("longitude") lng : Double,
     ) : Call<BasicResponse>
 
+    @GET("/user/friend")
+    fun getRequestMyFriendsList(
+        @Query("type") type : String,   // all, my, requested 세 문구만 입력    
+    ) : Call<BasicResponse>
+
 }
