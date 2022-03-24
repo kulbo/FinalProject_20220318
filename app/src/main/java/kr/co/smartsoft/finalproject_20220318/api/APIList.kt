@@ -50,4 +50,12 @@ interface APIList {
         @Query("type") type : String,   // all, my, requested 세 문구만 입력    
     ) : Call<BasicResponse>
 
+    //    친구 요청 수락/거절
+    @FormUrlEncoded
+    @PUT("/user/friend")
+    fun putRequestFriendAcceptDeny(
+        @Field("user_id") id: Int,
+        @Field("type") type: String     // 수락,거절 만 가능
+    ) : Call<BasicResponse>
+
 }

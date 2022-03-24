@@ -1,16 +1,24 @@
 package kr.co.smartsoft.finalproject_20220318.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kr.co.smartsoft.finalproject_20220318.R
+import kr.co.smartsoft.finalproject_20220318.api.APIList
+import kr.co.smartsoft.finalproject_20220318.api.ServerApi
 import kr.co.smartsoft.finalproject_20220318.datas.AppointmentData
+import kr.co.smartsoft.finalproject_20220318.datas.BasicResponse
 import kr.co.smartsoft.finalproject_20220318.datas.UserData
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class FriendRequestRecyclerAdapter(
     val mContext: Context,
@@ -22,6 +30,8 @@ class FriendRequestRecyclerAdapter(
         //        val imgProfile = view.findViewById<ImageView>(R.id.imgProfile)
         val txtNickname = view.findViewById<TextView>(R.id.txtNickname)
         val txtEmail = view.findViewById<TextView>(R.id.txtEmail)
+        val btnAccept = view.findViewById<Button>(R.id.btnAccept)
+        val btnDeny = view.findViewById<Button>(R.id.btnDeny)
 
         fun bind(data: UserData) {
 //            Glide.with(mContext).load(data.profile_img).into(imgProfile)
@@ -46,7 +56,33 @@ class FriendRequestRecyclerAdapter(
                 }
             }
 
+//            친구 요청 수락/거절 로직 구현 (함수로 분리하는 것 고려)
+            val ocl = View.OnClickListener {
+                val tagStr = it.tag.toString()
 
+                Log.d("친구 요청 결과 : 파람", tagStr)
+
+                val retrofit = ServerApi.getRerofit(mContext)
+                val apiList = retrofit.create(APIList::class.java)
+
+                apiList.putRequestFriendAcceptDeny(
+                    data.id,
+                    tagStr
+                ).enqueue(object : Callback<BasicResponse>{
+                    override fun onResponse(
+                        call: Call<BasicResponse>,
+                        response: Response<BasicResponse>
+                    ) {
+                    }
+
+                    override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                    }
+
+                })
+            }
+            btnAccept.setOnClickListener(ocl)
+            btnDeny.setOnClickListener(ocl)
         }
     }
 
