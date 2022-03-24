@@ -29,7 +29,7 @@ class MyFriendAdapter(
         val data = mList[position]
 
         val imgProfile = row.findViewById<ImageView>(R.id.imgProfile)
-        val txtNickname = row.findViewById<TextView>(R.id.txtNickName)
+        val txtNickname = row.findViewById<TextView>(R.id.txtNickname)
         val txtEmail = row.findViewById<TextView>(R.id.txtEmail)
         val imgSocialLoginLogo = row.findViewById<ImageView>(R.id.imgSocialLoginLogo)
 
