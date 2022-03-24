@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.view.menu.MenuAdapter
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import kr.co.smartsoft.finalproject_20220318.adapters.SerchRequestRecyclerAdapter
 import kr.co.smartsoft.finalproject_20220318.api.APIList
 import kr.co.smartsoft.finalproject_20220318.api.ServerApi
@@ -30,9 +31,9 @@ class SearchUserActivity : BaseActivity() {
     }
 
     override fun setUpEvents() {
-        val txtNickname = binding.edtNickname.text.toString()
 
         binding.btnSearch.setOnClickListener {
+            val txtNickname = binding.edtNickname.text.toString()
             val retrofit = ServerApi.getRerofit(mContext)
             val apiList = retrofit.create(APIList::class.java)
 
@@ -48,7 +49,7 @@ class SearchUserActivity : BaseActivity() {
 
                         mSearchedUserList.addAll(body.data.users)
 
-                        Log.d("검색된 사용자", mSearchedUserList.toString())
+                        Log.d("검색된", mSearchedUserList.toString())
                         mAdapter.notifyDataSetChanged()
                     }
                 }
@@ -62,6 +63,8 @@ class SearchUserActivity : BaseActivity() {
     }
 
     override fun setValues() {
-
+        mAdapter = SerchRequestRecyclerAdapter(mContext, mSearchedUserList)
+        binding.seachListRecyclerView.adapter = mAdapter
+        binding.seachListRecyclerView.layoutManager = LinearLayoutManager(mContext)
     }
 }
