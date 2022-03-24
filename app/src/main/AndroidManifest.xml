@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProject_20220318">
         <activity
+            android:name=".SearchUserActivity"
+            android:exported="false" />
+        <activity
             android:name=".ManageFriendsActivity"
             android:exported="false" />
         <activity
@@ -28,10 +31,10 @@
         </activity>
         <activity
             android:name=".SignInActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".SignUpActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true" />
