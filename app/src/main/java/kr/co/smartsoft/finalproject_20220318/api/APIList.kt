@@ -62,4 +62,11 @@ interface APIList {
     fun getRequestUserList(
         @Query("nickname") nickName : String,   // 검색할 닉네임 2자이상
     ) : Call<BasicResponse>
+
+    @FormUrlEncoded
+    @POST("/user/friend")
+    fun postRequestAddFriend(
+        @Field("user_id") userId: Int,
+    ) : Call<BasicResponse>
+
 }

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kr.co.smartsoft.finalproject_20220318.R
@@ -27,18 +28,18 @@ class SerchRequestRecyclerAdapter(
 
     inner class MyViewHolder(view : View) : RecyclerView.ViewHolder(view) {
 
-        //        val imgProfile = view.findViewById<ImageView>(R.id.imgProfile)
+//        val imgProfile = view.findViewById<ImageView>(R.id.imgProfile)
         val txtNickname = view.findViewById<TextView>(R.id.txtNickname)
         val txtEmail = view.findViewById<TextView>(R.id.txtEmail)
-//        val btnAddFrient = view.findViewById<Button>(R.id.btnAddFriend)
+        val btnAddFrient = view.findViewById<Button>(R.id.btnAddFriend)
 
-        fun bind(data: UserData) {
+        fun bind(userDat: UserData) {
 //            Glide.with(mContext).load(data.profile_img).into(imgProfile)
-            txtNickname.text = data.nick_name
+            txtNickname.text = userDat.nick_name
 
-            when (data.provider) {
+            when (userDat.provider) {
                 "default" -> {
-                    txtEmail.text = data.email
+                    txtEmail.text = userDat.email
                 }
                 "kakao" -> {
 //                "카카오로그인"
@@ -56,30 +57,29 @@ class SerchRequestRecyclerAdapter(
             }
 
 //            친구 요청 로직 구현
-//            val ocl = View.OnClickListener {
-//
-//                Log.d("친구 요청  : 파람", tagStr)
-//
-//                val retrofit = ServerApi.getRerofit(mContext)
-//                val apiList = retrofit.create(APIList::class.java)
-//
-//                apiList.putRequestFriendAcceptDeny(
-//                    data.id,
-//                    tagStr
-//                ).enqueue(object : Callback<BasicResponse>{
-//                    override fun onResponse(
-//                        call: Call<BasicResponse>,
-//                        response: Response<BasicResponse>
-//                    ) {
-//                    }
-//
-//                    override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
-//
-//                    }
-//
-//                })
-//            }
-//            btnAddFrient.setOnClickListener(ocl)
+            btnAddFrient.setOnClickListener {
+
+                val retrofit = ServerApi.getRerofit(mContext)
+                val apiList = retrofit.create(APIList::class.java)
+                val userId = userDat.id
+
+                apiList.postRequestAddFriend(userId).enqueue(object : Callback<BasicResponse>{
+                    override fun onResponse(
+                        call: Call<BasicResponse>,
+                        response: Response<BasicResponse>
+                    ) {
+                        if (response.isSuccessful) {
+                            val res = response.body()!!
+                            Toast.makeText(mContext, "${res.data.user.nick_name}에게 친구요청되었습니다.", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                    }
+
+                })
+            }
         }
     }
 
