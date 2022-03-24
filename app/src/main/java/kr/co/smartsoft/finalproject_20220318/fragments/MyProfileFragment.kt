@@ -12,7 +12,11 @@ import kr.co.smartsoft.finalproject_20220318.ManageFriendsActivity
 import kr.co.smartsoft.finalproject_20220318.R
 import kr.co.smartsoft.finalproject_20220318.SplashActivity
 import kr.co.smartsoft.finalproject_20220318.databinding.FragmentMyProfileBinding
+import kr.co.smartsoft.finalproject_20220318.datas.BasicResponse
 import kr.co.smartsoft.finalproject_20220318.utils.ContextUtil
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MyProfileFragment : BaseFragment() {
 
@@ -54,6 +58,20 @@ class MyProfileFragment : BaseFragment() {
     }
 
     override fun setValues() {
+        apiList.getRequestMyInfo().enqueue(object : Callback<BasicResponse> {
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+                if (response.isSuccessful) {
+                    val br = response.body()!!
+                    
+                    binding.txtNickname.text = br.data.user.nick_name.toString()
+                }
+            }
+
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+            }
+
+        })
 
     }
 }
