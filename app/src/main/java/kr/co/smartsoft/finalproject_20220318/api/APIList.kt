@@ -58,4 +58,8 @@ interface APIList {
         @Field("type") type: String     // 수락,거절 만 가능
     ) : Call<BasicResponse>
 
+    @GET("/search/user")
+    fun getRequestUserList(
+        @Query("nickname") nickName : String,   // 검색할 닉네임 2자이상
+    ) : Call<BasicResponse>
 }

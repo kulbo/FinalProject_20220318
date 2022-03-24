@@ -1,5 +1,6 @@
 package kr.co.smartsoft.finalproject_20220318
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -20,6 +21,11 @@ class ManageFriendsActivity : BaseActivity() {
     }
 
     override fun setUpEvents() {
+
+        binding.btnAddFriend.setOnClickListener {
+            val myIntent = Intent(mContext, SearchUserActivity::class.java)
+            startActivity(myIntent)
+        }
 
     }
 
