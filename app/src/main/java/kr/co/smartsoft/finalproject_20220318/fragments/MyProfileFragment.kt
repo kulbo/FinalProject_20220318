@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import kr.co.smartsoft.finalproject_20220318.ManageFriendsActivity
+import kr.co.smartsoft.finalproject_20220318.ManageMyPlacesActivity
 import kr.co.smartsoft.finalproject_20220318.R
 import kr.co.smartsoft.finalproject_20220318.SplashActivity
 import kr.co.smartsoft.finalproject_20220318.databinding.FragmentMyProfileBinding
@@ -42,6 +43,10 @@ class MyProfileFragment : BaseFragment() {
             startActivity(myIntent)
         }
 
+        binding.btnStartPlaces.setOnClickListener {
+            val myIntent = Intent(mContext, ManageMyPlacesActivity::class.java)
+            startActivity(myIntent)
+        }
         binding.btnLogOut.setOnClickListener {
             val alert = AlertDialog.Builder(mContext)
                 .setTitle("로그아웃")
