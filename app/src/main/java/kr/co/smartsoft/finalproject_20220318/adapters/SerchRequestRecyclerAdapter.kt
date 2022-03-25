@@ -28,27 +28,34 @@ class SerchRequestRecyclerAdapter(
 
     inner class MyViewHolder(view : View) : RecyclerView.ViewHolder(view) {
 
-//        val imgProfile = view.findViewById<ImageView>(R.id.imgProfile)
+        val imgProfile = view.findViewById<ImageView>(R.id.imgProfile)
         val txtNickname = view.findViewById<TextView>(R.id.txtNickname)
         val txtEmail = view.findViewById<TextView>(R.id.txtEmail)
         val btnAddFrient = view.findViewById<Button>(R.id.btnAddFriend)
 
         fun bind(userDat: UserData) {
-//            Glide.with(mContext).load(data.profile_img).into(imgProfile)
+            Glide.with(mContext).load(userDat.profile_img).into(imgProfile)
             txtNickname.text = userDat.nick_name
 
             when (userDat.provider) {
                 "default" -> {
+//                    imgProfile.visibility = View.GONE
                     txtEmail.text = userDat.email
                 }
                 "kakao" -> {
 //                "카카오로그인"
+//                    imgProfile.visibility = View.VISIBLE
+                    imgProfile.setImageResource(R.drawable.kakao)
                     txtEmail.text = "카카오로그인"
                 }
                 "facebook" -> {
+//                    imgProfile.visibility = View.VISIBLE
+                    imgProfile.setImageResource(R.drawable.facebook)
                     txtEmail.text = "페북 로그인"
                 }
                 "naver" -> {
+//                    imgProfile.visibility = View.VISIBLE
+                    imgProfile.setImageResource(R.drawable.naver)
                     txtEmail.text = "네이버 로그인"
                 }
                 else -> {
