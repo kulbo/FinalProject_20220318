@@ -69,8 +69,9 @@ class SerchRequestRecyclerAdapter(
                         response: Response<BasicResponse>
                     ) {
                         if (response.isSuccessful) {
-                            val res = response.body()!!
-                            Toast.makeText(mContext, "${res.data.user.nick_name}에게 친구요청되었습니다.", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(mContext, "${txtNickname.text}에게 친구요청되었습니다.", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(mContext, "${txtNickname.text}에게 친구요청이 실패했습니다.", Toast.LENGTH_SHORT).show()
                         }
                     }
 
