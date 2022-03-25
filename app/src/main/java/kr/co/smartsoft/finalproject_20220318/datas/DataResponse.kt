@@ -9,6 +9,8 @@ class DataResponse (
 
     val appointments: List<AppointmentData>,
 
+    val places: List<PlaceData>,
+
 ) {
 
 }
