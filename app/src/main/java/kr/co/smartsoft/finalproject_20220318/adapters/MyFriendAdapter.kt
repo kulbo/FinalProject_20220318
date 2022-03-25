@@ -31,7 +31,7 @@ class MyFriendAdapter(
         val imgProfile = row.findViewById<ImageView>(R.id.imgProfile)
         val txtNickname = row.findViewById<TextView>(R.id.txtNickname)
         val txtEmail = row.findViewById<TextView>(R.id.txtEmail)
-        val imgSocialLoginLogo = row.findViewById<ImageView>(R.id.imgSocialLoginLogo)
+//        val imgSocialLoginLogo = row.findViewById<ImageView>(R.id.imgSocialLoginLogo)
 
         Glide.with(mContext).load(data.profile_img).into(imgProfile)
         txtNickname.text = data.nick_name
@@ -42,12 +42,15 @@ class MyFriendAdapter(
             }
             "kakao" -> {
                 txtEmail.text = "카카오로그인"
+                imgProfile.setImageResource(R.drawable.kakao)
             }
             "facebook" -> {
                 txtEmail.text = "페북 로그인"
+                imgProfile.setImageResource(R.drawable.facebook)
             }
             "naver" -> {
                 txtEmail.text = "네이버 로그인"
+                imgProfile.setImageResource(R.drawable.naver)
             }
             else -> {
 
