@@ -20,13 +20,13 @@ class MyFriendsListRecyclerAdapter(
 
     inner class MyViewHolder(view : View) : RecyclerView.ViewHolder(view){
 
-//        val imgProfile = view.findViewById<ImageView>(R.id.imgProfile)
+        val imgProfile = view.findViewById<ImageView>(R.id.imgProfile)
         val txtNickname = view.findViewById<TextView>(R.id.txtNickname)
         val imgSocialLoginLogo = view.findViewById<ImageView>(R.id.imgSocialLoginLogo)
         val txtEmail = view.findViewById<TextView>(R.id.txtEmail)
 
         fun bind(data : UserData) {
-//            Glide.with(mContext).load(data.profile_img).into(imgProfile)
+            Glide.with(mContext).load(data.profile_img).into(imgProfile)
             txtNickname.text = data.nick_name
 
             when (data.provider) {
@@ -37,18 +37,20 @@ class MyFriendsListRecyclerAdapter(
                 "kakao" -> {
 //                "카카오로그인"
                     txtEmail.text = "카카오로그인"
+                    imgProfile.setImageResource(R.drawable.kakao)
                     imgSocialLoginLogo.visibility = View.VISIBLE
                     Glide.with(mContext).load(R.drawable.kakao).into(imgSocialLoginLogo)
                 }
                 "facebook" -> {
                     txtEmail.text = "페북 로그인"
+                    imgProfile.setImageResource(R.drawable.facebook)
                     imgSocialLoginLogo.visibility = View.VISIBLE
                     Glide.with(mContext).load(R.drawable.facebook).into(imgSocialLoginLogo)
                 }
                 "naver" -> {
                     txtEmail.text  = "네이버 로그인"
                     imgSocialLoginLogo.visibility = View.VISIBLE
-
+                    imgProfile.setImageResource(R.drawable.facebook)
                     Glide.with(mContext).load(R.drawable.naver).into(imgSocialLoginLogo)
                 }
                 else -> {
