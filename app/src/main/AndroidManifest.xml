@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProject_20220318">
         <activity
+            android:name=".ManageMyPlacesActivity"
+            android:exported="false" />
+        <activity
             android:name=".SearchUserActivity"
             android:exported="false" />
         <activity
