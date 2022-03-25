@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kr.co.smartsoft.finalproject_20220318.R
@@ -73,6 +74,7 @@ class FriendRequestRecyclerAdapter(
                         call: Call<BasicResponse>,
                         response: Response<BasicResponse>
                     ) {
+                        Toast.makeText(mContext, "${data.nick_name}님의 친구요청이 ${data.nick_name} 되었습니다.", Toast.LENGTH_SHORT).show()
                     }
 
                     override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
