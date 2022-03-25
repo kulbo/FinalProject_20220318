@@ -45,7 +45,7 @@ class MyProfileFragment : BaseFragment() {
         binding.btnLogOut.setOnClickListener {
             val alert = AlertDialog.Builder(mContext)
                 .setTitle("로그아웃")
-                .setMessage("정말 로구아웃")
+                .setMessage("정말 로그아웃")
                 .setPositiveButton("확인",DialogInterface.OnClickListener { dialogInterface, i ->
                     ContextUtil.setLoginUserToken(mContext, "")
                     val myIntent = Intent(mContext, SplashActivity::class.java)
