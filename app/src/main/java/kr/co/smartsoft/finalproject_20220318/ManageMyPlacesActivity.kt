@@ -1,5 +1,6 @@
 package kr.co.smartsoft.finalproject_20220318
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -35,6 +36,10 @@ class ManageMyPlacesActivity : BaseActivity() {
     }
     override fun setUpEvents() {
 
+        binding.btnAddPlace.setOnClickListener {
+            val myIntent = Intent(mContext, EditPlaceActivity::class.java)
+            startActivity(myIntent)
+        }
     }
 
     override fun setValues() {
