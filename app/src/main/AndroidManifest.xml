@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProject_20220318">
         <activity
+            android:name=".EditPlaceActivity"
+            android:exported="false" />
+        <activity
             android:name=".ManageMyPlacesActivity"
             android:exported="false" />
         <activity
