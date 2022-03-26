@@ -53,6 +53,7 @@ class ManageMyPlacesActivity : BaseActivity() {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
                 if (response.isSuccessful) {
                     val res = response.body()!!
+                    mMyPlaces.clear()
 
                     mMyPlaces.addAll(res.data.places)
 
