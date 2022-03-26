@@ -65,7 +65,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
@@ -74,7 +74,8 @@
                     android:text="출발장소"/>
                 <Spinner
                     android:id="@+id/startPlaceSpinner"
-                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="16sp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"/>
@@ -83,6 +84,7 @@
 
 
             <TextView
+                android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="약속 장소"/>
@@ -91,7 +93,7 @@
                 android:id="@+id/edtAppointmentPlace"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="장소 입력"/>
+                android:hint="장소 입력해 주세요"/>
 
             <FrameLayout
                 android:layout_width="match_parent"
