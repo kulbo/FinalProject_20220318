@@ -56,7 +56,7 @@ class EditPlaceActivity : BaseActivity() {
                     response: Response<BasicResponse>
                 ) {
                     if (response.isSuccessful) {
-                        Toast.makeText(mContext, "약속장소가 등록되었습니다.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(mContext, "출발장소가 등록되었습니다.", Toast.LENGTH_SHORT).show()
                         finish()
                     }
 
