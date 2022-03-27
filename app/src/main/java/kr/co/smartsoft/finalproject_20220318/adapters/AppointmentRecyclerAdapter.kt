@@ -27,7 +27,7 @@ class AppointmentRecyclerAdapter(
             txtTitle.text = data.title
             txtPlaceName.text = data.place
 
-            val sdf = SimpleDateFormat("yy년 Md월 d일 a h시 m분")
+            val sdf = SimpleDateFormat("yy년 M월 d일 a h시 m분")
             txtDateTime.text = sdf.format(data.datetime)
 
         }
