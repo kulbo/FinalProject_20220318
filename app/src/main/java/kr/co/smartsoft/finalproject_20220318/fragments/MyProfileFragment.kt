@@ -1,16 +1,20 @@
 package kr.co.smartsoft.finalproject_20220318.fragments
 
+import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.normal.TedPermission
 import kr.co.smartsoft.finalproject_20220318.ManageFriendsActivity
 import kr.co.smartsoft.finalproject_20220318.ManageMyPlacesActivity
 import kr.co.smartsoft.finalproject_20220318.R
@@ -22,6 +26,7 @@ import kr.co.smartsoft.finalproject_20220318.utils.URIPathHelper
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -50,10 +55,24 @@ class MyProfileFragment : BaseFragment() {
     override fun setUpEvents() {
 
         binding.imgProfile.setOnClickListener {
-            val myIntent = Intent()
-            myIntent.action = Intent.ACTION_PICK    // 뭔가 가지려 가는 인텐트
-            myIntent.type = android.provider.MediaStore.Images.Media.CONTENT_TYPE       // 사진을 가지러 간다
-            startActivityForResult(myIntent, REQUEST_CODE_GALLERY )
+            val pl = object : PermissionListener{
+                override fun onPermissionGranted() {
+                    val myIntent = Intent()
+                    myIntent.action = Intent.ACTION_PICK    // 뭔가 가지려 가는 인텐트
+                    myIntent.type = android.provider.MediaStore.Images.Media.CONTENT_TYPE       // 사진을 가지러 간다
+                    startActivityForResult(myIntent, REQUEST_CODE_GALLERY )
+                }
+
+                override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+                    Toast.makeText(mContext, "갤러리 조회 권한이 없습니다.", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+
+            TedPermission.create()
+                .setPermissionListener(pl)
+                .setPermissions(Manifest.permission.READ_EXTERNAL_STORAGE)
+                .check()
         }
 
         binding.btnManageFriends.setOnClickListener {
@@ -123,10 +142,14 @@ class MyProfileFragment : BaseFragment() {
                             Toast.makeText(mContext, "프로필 사진이 변경됨", Toast.LENGTH_SHORT).show()
                             Glide.with(mContext).load(selectedImageUri).into(binding.imgProfile)
                         }
+                        else {
+                            val jsonObj = JSONObject(response.errorBody()!!.string())
+                                Log.d("실패 응답", jsonObj.toString())
+                        }
                     }
 
                     override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
-
+                        Log.d("호출확인", call.toString())
                     }
 
                 })
