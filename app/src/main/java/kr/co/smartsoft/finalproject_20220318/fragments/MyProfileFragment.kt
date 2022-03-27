@@ -18,6 +18,9 @@ import kr.co.smartsoft.finalproject_20220318.databinding.FragmentMyProfileBindin
 import kr.co.smartsoft.finalproject_20220318.datas.BasicResponse
 import kr.co.smartsoft.finalproject_20220318.utils.ContextUtil
 import kr.co.smartsoft.finalproject_20220318.utils.URIPathHelper
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -102,6 +105,11 @@ class MyProfileFragment : BaseFragment() {
                 val selectedImageUri = data?.data!! // 선택한 사진을 찾아갈 경로
 //                    Uri -> 실제 첨부 가능한 파일 형태로 변환
                 val file = File(URIPathHelper().getPath(mContext, selectedImageUri))
+//                완성된 파일을 Retrofit에 첨부 가능한 RequestBody 형태로 가공.
+                val fileReqBody = RequestBody.create(MediaType.get("image/*"), file)
+//                  실제첨부하자 일반형태가 아닌 Multipart 형태로 가공
+//                cf) 파일이 같이 첨부되는 API 통신은 Multipart 형태로 모든 데이터를 첨부해야함.
+                val multiPartBody = MultipartBody.Part.createFormData("profile_image", "myProfile.jpg", fileReqBody)
 
             }
         }
