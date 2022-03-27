@@ -52,6 +52,7 @@ class AppointmentListFragment : BaseFragment() {
         binding.appointmentRecycleView.adapter = mAppointmentAdapter
         binding.appointmentRecycleView.layoutManager = LinearLayoutManager(mContext)
 
+        binding.btnMakeAppoint.visibility = View.GONE
     }
 
     override fun onResume() {
