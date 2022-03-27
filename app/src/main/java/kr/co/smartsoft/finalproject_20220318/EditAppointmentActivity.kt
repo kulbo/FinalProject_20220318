@@ -134,6 +134,8 @@ class EditAppointmentActivity : BaseActivity() {
 
     override fun setValues() {
 
+        imgAdd.visibility = View.GONE           // ActionBar 의 플러스 버튼 보이지 않도록
+
         binding.naverMapView.getMapAsync {
             naverMap = it
 
@@ -204,8 +206,7 @@ class EditAppointmentActivity : BaseActivity() {
             return          // 시작과 목적지 좌표중 1개라도 없으면
         }
 
-// 내것     val myODsayService = ODsayService.init(mContext, "5NFeRMEhquZ01oO58qPoNba4Y0GJA7417pu+DeUHWQI")
-        val myODsayService = ODsayService.init(mContext, "gw9m7KtTSb97PJwg3C/jQx+OKMjdKmugQKqgeBp44Vk")
+        val myODsayService = ODsayService.init(mContext, "5NFeRMEhquZ01oO58qPoNba4Y0GJA7417pu+DeUHWQI")
         // 대중교통 길찾기 ODsay API 호출
         myODsayService.requestSearchPubTransPath(
             mSelectStartPlace!!.longitude.toString(),

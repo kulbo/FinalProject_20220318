@@ -25,11 +25,11 @@ class MainActivity : BaseActivity() {
             when(it.itemId) {
                 R.id.myAppointment -> {
                     binding.mainViewPager2.currentItem = 0
-                    imgAdd.visibility = View.VISIBLE
+                    imgAdd.visibility = View.VISIBLE        // ActionBar 의 플러스 버튼 보이도록
                 }
                 R.id.myProfile -> {
                     binding.mainViewPager2.currentItem = 1
-                    imgAdd.visibility = View.GONE
+                    imgAdd.visibility = View.GONE           // ActionBar 의 플러스 버튼 보이지 않도록
                 }
             }
             return@setOnItemSelectedListener true
