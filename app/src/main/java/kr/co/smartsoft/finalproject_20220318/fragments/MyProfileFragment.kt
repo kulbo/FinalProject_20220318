@@ -1,5 +1,6 @@
 package kr.co.smartsoft.finalproject_20220318.fragments
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import com.bumptech.glide.Glide
 import kr.co.smartsoft.finalproject_20220318.ManageFriendsActivity
 import kr.co.smartsoft.finalproject_20220318.ManageMyPlacesActivity
 import kr.co.smartsoft.finalproject_20220318.R
@@ -43,7 +45,7 @@ class MyProfileFragment : BaseFragment() {
 
         binding.imgProfile.setOnClickListener {
             val myIntent = Intent()
-            myIntent.action = Intent.ACTION_PICK    // 뭔가 가지려 가는
+            myIntent.action = Intent.ACTION_PICK    // 뭔가 가지려 가는 인텐트
             myIntent.type = android.provider.MediaStore.Images.Media.CONTENT_TYPE       // 사진을 가지러 간다
             startActivityForResult(myIntent, REQUEST_CODE_GALLERY )
         }
@@ -79,6 +81,7 @@ class MyProfileFragment : BaseFragment() {
                     val br = response.body()!!
                     
                     binding.txtNickname.text = br.data.user.nick_name.toString()
+                    Glide.with(mContext).load(br.data.user.profile_img).into(binding.imgProfile)
                 }
             }
 
@@ -87,6 +90,18 @@ class MyProfileFragment : BaseFragment() {
             }
 
         })
+    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_GALLERY) {
+            if (resultCode == Activity.RESULT_OK) {
+//                선택된 사진에 대한 정보를 가지고 있당
+                val selectedImageUrl = data?.data!! // 선택한 사진을 찾아갈 경로
+
+                Glide.with(mContext).load(selectedImageUrl).into(binding.imgProfile)
+
+            }
+        }
     }
 }
