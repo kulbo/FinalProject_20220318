@@ -3,6 +3,7 @@ package kr.co.smartsoft.finalproject_20220318
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import kr.co.smartsoft.finalproject_20220318.adapters.FrientViewPagerAdapter
@@ -40,12 +41,20 @@ class ManageMyPlacesActivity : BaseActivity() {
             val myIntent = Intent(mContext, EditPlaceActivity::class.java)
             startActivity(myIntent)
         }
+        imgAdd.setOnClickListener {
+            val myIntent = Intent(mContext, EditPlaceActivity::class.java)
+            startActivity(myIntent)
+        }
+
     }
 
     override fun setValues() {
         mAdapter = MyPlacesRecyclerAdapter(mContext, mMyPlaces)
         binding.managePlacesRccyclerView.adapter = mAdapter
         binding.managePlacesRccyclerView.layoutManager = LinearLayoutManager(mContext)
+
+        imgAdd.visibility = View.VISIBLE
+        binding.btnAddPlace.visibility = View.GONE
     }
 
     fun getMyPlacesFromServer(){

@@ -3,6 +3,7 @@ package kr.co.smartsoft.finalproject_20220318
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import kr.co.smartsoft.finalproject_20220318.adapters.FrientViewPagerAdapter
 import kr.co.smartsoft.finalproject_20220318.databinding.ActivityManageFriendsBinding
@@ -33,6 +34,8 @@ class ManageFriendsActivity : BaseActivity() {
         mAdapter = FrientViewPagerAdapter(supportFragmentManager)
         binding.viewFriends.adapter = mAdapter
         binding.tabFriends.setupWithViewPager(binding.viewFriends)
+
+        imgAdd.visibility = View.GONE
 
     }
 }

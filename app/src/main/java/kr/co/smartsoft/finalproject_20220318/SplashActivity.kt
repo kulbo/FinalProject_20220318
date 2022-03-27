@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import kr.co.smartsoft.finalproject_20220318.databinding.ActivitySignUpBinding
 import kr.co.smartsoft.finalproject_20220318.databinding.ActivitySplashBinding
 import kr.co.smartsoft.finalproject_20220318.datas.BasicResponse
@@ -27,6 +28,8 @@ class SplashActivity : BaseActivity() {
     override fun setValues() {
 
         var isMyInfoLoaded = false
+
+        imgAdd.visibility = View.GONE       // ActionBar에 프러스  버튼 보이지 않계
 
         apiList.getRequestMyInfo().enqueue(object : Callback<BasicResponse>{
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {

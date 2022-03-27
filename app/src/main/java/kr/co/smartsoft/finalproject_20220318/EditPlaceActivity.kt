@@ -2,6 +2,7 @@ package kr.co.smartsoft.finalproject_20220318
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.naver.maps.geometry.LatLng
@@ -74,6 +75,8 @@ class EditPlaceActivity : BaseActivity() {
     }
 
     override fun setValues() {
+
+        imgAdd.visibility = View.GONE
 
         binding.impMap.getMapAsync {
             val imMap = it

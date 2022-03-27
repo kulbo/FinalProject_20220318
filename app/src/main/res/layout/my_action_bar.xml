@@ -14,7 +14,7 @@
         android:gravity="center"
         android:layout_gravity="center_vertical"
         android:textColor="@color/black"
-        android:text="약속잘 지킴이"/>
+        android:text="약속 잘 지킴이"/>
 
     <ImageView
         android:id="@+id/imgPlus"

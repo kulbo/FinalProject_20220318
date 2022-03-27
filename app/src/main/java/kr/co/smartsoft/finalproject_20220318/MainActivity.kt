@@ -1,7 +1,9 @@
 package kr.co.smartsoft.finalproject_20220318
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.viewpager2.widget.ViewPager2
 import kr.co.smartsoft.finalproject_20220318.adapters.MainViewPager2Adapter
@@ -21,8 +23,14 @@ class MainActivity : BaseActivity() {
     override fun setUpEvents() {
         binding.btnBottomNav.setOnItemSelectedListener {
             when(it.itemId) {
-                R.id.myAppointment -> binding.mainViewPager2.currentItem = 0
-                R.id.myProfile -> binding.mainViewPager2.currentItem = 1
+                R.id.myAppointment -> {
+                    binding.mainViewPager2.currentItem = 0
+                    imgAdd.visibility = View.VISIBLE
+                }
+                R.id.myProfile -> {
+                    binding.mainViewPager2.currentItem = 1
+                    imgAdd.visibility = View.GONE
+                }
             }
             return@setOnItemSelectedListener true
         }
@@ -37,6 +45,10 @@ class MainActivity : BaseActivity() {
                 }
             }
         })
+        imgAdd.setOnClickListener {
+            val myIntent = Intent(mContext, EditAppointmentActivity::class.java)
+            startActivity(myIntent)
+        }
 
     }
 
