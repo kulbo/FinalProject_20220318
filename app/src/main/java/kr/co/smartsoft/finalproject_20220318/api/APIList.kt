@@ -43,6 +43,9 @@ interface APIList {
     fun postRequestAddAppointment(
         @Field("title") title : String,
         @Field("datetime") datetime : String,
+        @Field("start_place") stPlaceName : String,
+        @Field("start_latitude") stLat : Double,
+        @Field("start_longitude") stLng : Double,
         @Field("place") place : String,
         @Field("latitude") lat : Double,
         @Field("longitude") lng : Double,

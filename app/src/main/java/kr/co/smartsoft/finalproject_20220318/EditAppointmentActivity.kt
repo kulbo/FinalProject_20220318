@@ -81,12 +81,12 @@ class EditAppointmentActivity : BaseActivity() {
                 Toast.makeText(mContext, "약속 장소를 입력해 주세요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            if (txtDate == "") {
-                Toast.makeText(mContext, "약속 일자를 입력해 주세요", Toast.LENGTH_SHORT).show()
+            if (txtDate == "약속 일자") {
+                Toast.makeText(mContext, "약속 일자를 선택해 주세요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            if (txtTime == "") {
-                Toast.makeText(mContext, "약속 시간을 입력해 주세요", Toast.LENGTH_SHORT).show()
+            if (txtTime == "약속 시간") {
+                Toast.makeText(mContext, "약속 시간을 선택해 주세요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -94,6 +94,7 @@ class EditAppointmentActivity : BaseActivity() {
                 Toast.makeText(mContext, "약속 장소를 선택하지 않았습니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            val stPlace = mStartPlaceList[binding.startPlaceSpinner.selectedItemPosition]
 
             val now = Calendar.getInstance()
             if (mSelectedDateTime.timeInMillis < now.timeInMillis) {
@@ -110,8 +111,7 @@ class EditAppointmentActivity : BaseActivity() {
             val sdt = sdf.format(mSelectedDateTime.time)
 
             apiList.postRequestAddAppointment(
-                edtTitle, sdt, edtPlace, lat, lon
-
+                edtTitle, sdt, stPlace.name, stPlace.latitude, stPlace.longitude, edtPlace, lat, lon
             ).enqueue(object : Callback<BasicResponse>{
                 override fun onResponse(
                     call: Call<BasicResponse>,
