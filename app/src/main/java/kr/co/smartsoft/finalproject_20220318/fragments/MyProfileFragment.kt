@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
 import kr.co.smartsoft.finalproject_20220318.ManageFriendsActivity
@@ -118,7 +119,10 @@ class MyProfileFragment : BaseFragment() {
                         call: Call<BasicResponse>,
                         response: Response<BasicResponse>
                     ) {
-
+                        if (response.isSuccessful) {
+                            Toast.makeText(mContext, "프로필 사진이 변경됨", Toast.LENGTH_SHORT).show()
+                            Glide.with(mContext).load(selectedImageUri).into(binding.imgProfile)
+                        }
                     }
 
                     override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
