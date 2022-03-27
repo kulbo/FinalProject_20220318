@@ -23,6 +23,8 @@ class MyProfileFragment : BaseFragment() {
 
     lateinit var binding : FragmentMyProfileBinding
 
+    val REQUEST_CODE_GALLERY = 2000
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,6 +40,14 @@ class MyProfileFragment : BaseFragment() {
         setValues()
     }
     override fun setUpEvents() {
+
+        binding.imgProfile.setOnClickListener {
+            val myIntent = Intent()
+            myIntent.action = Intent.ACTION_PICK    // 뭔가 가지려 가는
+            myIntent.type = android.provider.MediaStore.Images.Media.CONTENT_TYPE       // 사진을 가지러 간다
+            startActivityForResult(myIntent, REQUEST_CODE_GALLERY )
+        }
+
         binding.btnManageFriends.setOnClickListener {
             val myIntent = Intent(mContext, ManageFriendsActivity::class.java)
             startActivity(myIntent)
