@@ -17,9 +17,11 @@ import kr.co.smartsoft.finalproject_20220318.SplashActivity
 import kr.co.smartsoft.finalproject_20220318.databinding.FragmentMyProfileBinding
 import kr.co.smartsoft.finalproject_20220318.datas.BasicResponse
 import kr.co.smartsoft.finalproject_20220318.utils.ContextUtil
+import kr.co.smartsoft.finalproject_20220318.utils.URIPathHelper
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 
 class MyProfileFragment : BaseFragment() {
 
@@ -97,9 +99,9 @@ class MyProfileFragment : BaseFragment() {
         if (requestCode == REQUEST_CODE_GALLERY) {
             if (resultCode == Activity.RESULT_OK) {
 //                선택된 사진에 대한 정보를 가지고 있당
-                val selectedImageUrl = data?.data!! // 선택한 사진을 찾아갈 경로
-
-                Glide.with(mContext).load(selectedImageUrl).into(binding.imgProfile)
+                val selectedImageUri = data?.data!! // 선택한 사진을 찾아갈 경로
+//                    Uri -> 실제 첨부 가능한 파일 형태로 변환
+                val file = File(URIPathHelper().getPath(mContext, selectedImageUri))
 
             }
         }
