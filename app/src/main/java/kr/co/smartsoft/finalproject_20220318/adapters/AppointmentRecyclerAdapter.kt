@@ -2,6 +2,7 @@ package kr.co.smartsoft.finalproject_20220318.adapters
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +29,7 @@ class AppointmentRecyclerAdapter(
         fun bind(data : AppointmentData) {
             txtTitle.text = data.title
             txtPlaceName.text = data.place
+            Log.d("약속일시", "${data.datetime}")
 
             val sdf = SimpleDateFormat("yy년 M월 d일 a h시 m분")
             txtDateTime.text = sdf.format(data.datetime)
