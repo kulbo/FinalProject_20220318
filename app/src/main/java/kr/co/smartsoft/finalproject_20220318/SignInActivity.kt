@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import com.kakao.sdk.user.UserApiClient
 import kr.co.smartsoft.finalproject_20220318.databinding.ActivitySignInBinding
 import kr.co.smartsoft.finalproject_20220318.datas.BasicResponse
 import kr.co.smartsoft.finalproject_20220318.utils.ContextUtil
@@ -25,6 +26,9 @@ class SignInActivity : BaseActivity() {
 
     override fun setUpEvents() {
 
+        binding.btnKakaoLogin.setOnClickListener {
+            getKakaoLogin()
+        }
         binding.btnSignUp.setOnClickListener {
             val myIntent = Intent(mContext, SignUpActivity::class.java)
             startActivity(myIntent)
@@ -75,7 +79,8 @@ class SignInActivity : BaseActivity() {
     }
 
     override fun setValues() {
+    }
 
-
+    fun getKakaoLogin(){
     }
 }
