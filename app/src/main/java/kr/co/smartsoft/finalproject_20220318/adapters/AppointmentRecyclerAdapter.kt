@@ -34,6 +34,7 @@ class AppointmentRecyclerAdapter(
 
             imgViewMap.setOnClickListener {
                 val myIntent = Intent(mContext, ViewMapActivity::class.java)
+                myIntent.putExtra("appointment", data)
                 mContext.startActivity(myIntent)
             }
 
