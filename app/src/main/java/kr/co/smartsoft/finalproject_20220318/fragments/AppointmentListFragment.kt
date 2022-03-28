@@ -52,7 +52,7 @@ class AppointmentListFragment : BaseFragment() {
         binding.appointmentRecycleView.adapter = mAppointmentAdapter
         binding.appointmentRecycleView.layoutManager = LinearLayoutManager(mContext)
 
-        binding.btnMakeAppoint.visibility = View.GONE
+        binding.btnMakeAppoint.visibility = View.GONE       // 약속추가 버튼 보이지 않게
     }
 
     override fun onResume() {
