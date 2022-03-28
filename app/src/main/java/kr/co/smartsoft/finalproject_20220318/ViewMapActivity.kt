@@ -48,7 +48,8 @@ class ViewMapActivity : BaseActivity() {
     override fun setValues() {
 
 //        ActionBar의 문구를 변경
-        txtTitle.text = "약소장소 지도 확인"
+        txtTitle.text = "약속장소 지도 확인"
+        imgAdd.visibility = View.GONE
 
         binding.naverMapView.getMapAsync {
             naverMap = it
