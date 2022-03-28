@@ -59,10 +59,15 @@ class EditAppointmentActivity : BaseActivity() {
                 mSelectStartPlace = mStartPlaceList[position]
                 setMapView()
             }
-
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
-
+        }
+        
+//        스크롤 보조용 덱스트뷰에 손이 닿으면 -> 스크롤뷰의 이벤트 임시정지(지도만 움직이게)
+        binding.txtScrollHelp.setOnTouchListener { view, motionEvent ->  
+            binding.scrollView.requestDisallowInterceptTouchEvent(true)
+//            텍스트뷰의 터치 이벤트만? false => 뒤에 가려져 있는 지도는 터치를 허용하도록
+            return@setOnTouchListener false
         }
 
         setDateTime()
