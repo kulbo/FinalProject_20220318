@@ -3,6 +3,9 @@ package kr.co.smartsoft.finalproject_20220318
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
@@ -122,21 +125,28 @@ class ViewMapActivity : BaseActivity() {
                     val payment = infoObj.getInt("payment")             // 총 요금
 
                     val infoWindow = InfoWindow()
-                    infoWindow.adapter = object : InfoWindow.DefaultTextAdapter(mContext) {
-                        override fun getText(p0: InfoWindow): CharSequence {
-                            return "이동시간 : ${totalTime}분, 비용 ${payment}원"
+                    infoWindow.adapter = object : InfoWindow.DefaultViewAdapter(mContext) {
+                        override fun getContentView(p0: InfoWindow): View {
+                            val view = LayoutInflater.from(mContext).inflate(R.layout.destination_info_window, null)
+                            val txtPlaceName = view.findViewById<TextView>(R.id.txtPlanceName)
+                            val txtDataTime = view.findViewById<TextView>(R.id.txtDateTime)
+                            val txtPayment = view.findViewById<TextView>(R.id.txtPayment)
+
+                            txtPlaceName.text = mAppointment.place
+                            txtDataTime.text = "${totalTime}분 소요"
+                            txtPayment.text = "${payment}원 필요"
+
+                            return view
                         }
+
                     }
+//                    infoWindow.adapter = object : InfoWindow.DefaultTextAdapter(mContext) {
+//                        override fun getText(p0: InfoWindow): CharSequence {
+//                            return "이동시간 : ${totalTime}분, 비용 ${payment}원"
+//                        }
+//
+//                    }
                     infoWindow.open(marker!!)
-                    marker!!.setOnClickListener {
-                        if (marker!!.infoWindow == null) {
-                            infoWindow.open(marker!!)
-                        }
-                        else {
-                            infoWindow.close()
-                        }
-                        return@setOnClickListener true
-                    }
                     val cameraFocus = CameraUpdate.scrollTo(LatLng(mAppointment.latitude, mAppointment.longitude))
                     naverMap!!.moveCamera(cameraFocus)
                 }
