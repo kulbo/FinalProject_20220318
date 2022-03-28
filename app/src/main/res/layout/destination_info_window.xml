@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/txtPlanceName"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="장소이름"/>
+    <TextView
+        android:id="@+id/txtDateTime"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="소요시간"/>
+    <TextView
+        android:id="@+id/txtPayment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="소요비용"/>
+    
+
+</LinearLayout>
