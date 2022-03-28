@@ -1,6 +1,7 @@
 package kr.co.smartsoft.finalproject_20220318.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.smartsoft.finalproject_20220318.R
+import kr.co.smartsoft.finalproject_20220318.ViewMapActivity
 import kr.co.smartsoft.finalproject_20220318.datas.AppointmentData
 import java.text.SimpleDateFormat
 
@@ -21,7 +23,7 @@ class AppointmentRecyclerAdapter(
         val txtTitle = view.findViewById<TextView>(R.id.txtTitle)
         val txtPlaceName = view.findViewById<TextView>(R.id.txtPlanceName)
         val txtDateTime = view.findViewById<TextView>(R.id.txtDateTime)
-        val txtViewMap = view.findViewById<ImageView>(R.id.imgViewMap)
+        val imgViewMap = view.findViewById<ImageView>(R.id.imgViewMap)
 
         fun bind(data : AppointmentData) {
             txtTitle.text = data.title
@@ -29,6 +31,11 @@ class AppointmentRecyclerAdapter(
 
             val sdf = SimpleDateFormat("yy년 M월 d일 a h시 m분")
             txtDateTime.text = sdf.format(data.datetime)
+
+            imgViewMap.setOnClickListener {
+                val myIntent = Intent(mContext, ViewMapActivity::class.java)
+                mContext.startActivity(myIntent)
+            }
 
         }
     }
