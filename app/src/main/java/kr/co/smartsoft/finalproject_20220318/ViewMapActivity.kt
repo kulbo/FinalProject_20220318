@@ -77,7 +77,6 @@ class ViewMapActivity : BaseActivity() {
         val stationList = ArrayList<LatLng>()
 
 //            첫 좌표는 출발 장소.
-
         stationList.add( LatLng( mAppointment.start_latitude, mAppointment.start_longitude ) )
 
         val myODsayService = ODsayService.init(mContext, "5NFeRMEhquZ01oO58qPoNba4Y0GJA7417pu+DeUHWQI")
@@ -98,7 +97,6 @@ class ViewMapActivity : BaseActivity() {
                     Log.d("resultObj", resultObj.toString())
                     val pathArr = resultObj.getJSONArray("path")    // 1-9 추천경로들을 pathArr로 지정
                     val firstPathObj = pathArr.getJSONObject(0)     // 첫번째 추천 경로만 받아온다.
-                    val stationLatLngList = ArrayList<LatLng>()
 //                    출발지 좌표를 정거장 목록에 추가
                     val subPathArr = firstPathObj.getJSONArray("subPath")       // 이동 교통수단정보를 subPathArr에 지정
                     for (i in 0 until subPathArr.length()) {
@@ -110,7 +108,7 @@ class ViewMapActivity : BaseActivity() {
                                 val stationObj = stationsArr.getJSONObject(j)
                                 val lat = stationObj.getString("y").toDouble()  // 정류장의 위도를 lat
                                 val lng = stationObj.getString("x").toDouble()  // 정류장의 경도를 lng
-                                stationLatLngList.add(LatLng(lat, lng))               // 정류장의 위도, 경도를 좌표로 변환하여 경로에 추가
+                                stationList.add(LatLng(lat, lng))               // 정류장의 위도, 경도를 좌표로 변환하여 경로에 추가
                             }
                         }
                     }
