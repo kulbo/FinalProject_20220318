@@ -23,7 +23,11 @@ class ManageFriendsActivity : BaseActivity() {
 
     override fun setUpEvents() {
 
-        binding.btnAddFriend.setOnClickListener {
+//        binding.btnAddFriend.setOnClickListener {
+//            val myIntent = Intent(mContext, SearchUserActivity::class.java)
+//            startActivity(myIntent)
+//        }
+        imgAdd.setOnClickListener {
             val myIntent = Intent(mContext, SearchUserActivity::class.java)
             startActivity(myIntent)
         }
@@ -35,7 +39,7 @@ class ManageFriendsActivity : BaseActivity() {
         binding.viewFriends.adapter = mAdapter
         binding.tabFriends.setupWithViewPager(binding.viewFriends)
 
-        imgAdd.visibility = View.GONE
+        binding.btnAddFriend.visibility = View.GONE
 
     }
 }
