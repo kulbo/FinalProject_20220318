@@ -2,15 +2,12 @@ package kr.co.smartsoft.finalproject_20220318
 
 import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Base64
 import android.util.Log
 import android.view.View
-import kr.co.smartsoft.finalproject_20220318.databinding.ActivitySignUpBinding
-import kr.co.smartsoft.finalproject_20220318.databinding.ActivitySplashBinding
 import kr.co.smartsoft.finalproject_20220318.datas.BasicResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -65,7 +62,7 @@ class SplashActivity : BaseActivity() {
         getKeyHash()
    }
 
-    // 카카오 로그인시 Hash key값 가져오기
+    // 소셜 로그인시 Hash key값 가져오기
     fun getKeyHash() {
         val info = packageManager.getPackageInfo(
             "kr.co.smartsoft.finalproject_20220318",
