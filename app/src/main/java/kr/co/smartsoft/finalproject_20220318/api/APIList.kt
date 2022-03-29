@@ -3,6 +3,7 @@ package kr.co.smartsoft.finalproject_20220318.api
 import kr.co.smartsoft.finalproject_20220318.datas.BasicResponse
 import okhttp3.MultipartBody
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.http.*
 
 interface APIList {
@@ -88,7 +89,15 @@ interface APIList {
 //    프로필 사진 첨부 => 파라미터에 파일이 있다 : Field 대신, Multipart 활용
     @Multipart
     @PUT("/user/image")
-    fun putRequestProgileImg(
+    fun putRequestProfileImg(
         @Part img : MultipartBody.Part
+    ) : Call<BasicResponse>
+
+    @FormUrlEncoded
+    @POST("/user/social")
+    fun postRequestSocialLogin(
+        @Field("provider") provider : String,
+        @Field("uid") uid : String,
+        @Field("nick_name") nick_name : String,
     ) : Call<BasicResponse>
 }
