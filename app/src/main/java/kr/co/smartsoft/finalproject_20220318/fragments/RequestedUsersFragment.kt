@@ -47,7 +47,11 @@ class RequestedUsersFragment : BaseFragment(){
         mRequestedAdapter = FriendRequestRecyclerAdapter(mContext, mRequestedList )
         binding.myRequestedListRecyclerView.adapter = mRequestedAdapter
         binding.myRequestedListRecyclerView.layoutManager = LinearLayoutManager(mContext)
+    }
 
+    override fun onResume() {
+        super.onResume()
+//        목록 새로고침을 위해 이동
         getRequestedListFromServer()
     }
 
