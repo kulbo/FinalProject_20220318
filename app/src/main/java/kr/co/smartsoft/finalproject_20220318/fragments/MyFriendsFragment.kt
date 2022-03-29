@@ -37,17 +37,20 @@ class MyFriendsFragment : BaseFragment(){
         setValues()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        getMyFriendsListFromServer()
+    }
     override fun setUpEvents() {
 
     }
 
     override fun setValues() {
-
+        // 어뎁터와 RecyclerView를 연결하여 데이터를 보이도록 한다.
         mMyFriendAdapter = MyFriendsListRecyclerAdapter(mContext, mMyFriendsList )
         binding.myFriendsListRecyclerView.adapter = mMyFriendAdapter
         binding.myFriendsListRecyclerView.layoutManager = LinearLayoutManager(mContext)
-
-        getMyFriendsListFromServer()
     }
 
     fun getMyFriendsListFromServer() {
