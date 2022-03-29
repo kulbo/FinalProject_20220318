@@ -67,6 +67,7 @@ class FriendRequestRecyclerAdapter(
 
 //            친구 요청 수락/거절 로직 구현 (함수로 분리하는 것 고려)
             val ocl = View.OnClickListener {
+//                "승인","거절"구분자를 tagStr 변수에 담는다.
                 val tagStr = it.tag.toString()
 
                 Log.d("친구 요청 결과 : 파람", tagStr)
