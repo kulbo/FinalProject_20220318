@@ -28,18 +28,6 @@ class SignInActivity : BaseActivity() {
 
         binding.btnKakaoLogin.setOnClickListener {
             getKakaoLogin()
-            //        카카오로그인 가능한지 확인한다.
-//            if (UserApiClient.instance.isKakaoTalkLoginAvailable(mContext)) {
-//                UserApiClient.instance.loginWithKakaoTalk(mContext) { token, error ->
-//                    getKakaoUserInfo()
-//                }
-//            } else {
-////            카톡이 설치되지 않아 로구인 창을 뛰운다.
-//                UserApiClient.instance.loginWithKakaoAccount(mContext) { token, error ->
-//                    getKakaoUserInfo()
-//                }
-//            }
-
         }
         binding.btnSignUp.setOnClickListener {
             val myIntent = Intent(mContext, SignUpActivity::class.java)
