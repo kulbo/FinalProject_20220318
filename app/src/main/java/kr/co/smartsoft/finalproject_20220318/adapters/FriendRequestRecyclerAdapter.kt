@@ -82,7 +82,7 @@ class FriendRequestRecyclerAdapter(
                         call: Call<BasicResponse>,
                         response: Response<BasicResponse>
                     ) {
-                        Toast.makeText(mContext, "${data.nick_name}님의 친구요청이 ${data.nick_name} 되었습니다.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(mContext, "${data.nick_name}님의 친구요청이 ${tagStr} 되었습니다.", Toast.LENGTH_SHORT).show()
                     }
 
                     override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
