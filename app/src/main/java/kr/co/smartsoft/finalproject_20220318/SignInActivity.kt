@@ -37,7 +37,6 @@ class SignInActivity : BaseActivity() {
         binding.btnFacebookLogin.setOnClickListener {
             LoginManager.getInstance().registerCallback(mCallbackManager, object : FacebookCallback<LoginResult> {
                 override fun onSuccess(result: LoginResult?) {
-                    Log.d("페북로그인성공", result?.accessToken.toString())
                     val graphRequest = GraphRequest.newMeRequest(result?.accessToken, object : GraphRequest.GraphJSONObjectCallback {
                         override fun onCompleted(jsonObj: JSONObject?, response: GraphResponse?) {
                             Log.d("페북받아온정보", jsonObj!!.toString())
