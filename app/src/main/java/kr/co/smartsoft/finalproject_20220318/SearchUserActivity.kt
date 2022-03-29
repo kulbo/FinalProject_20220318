@@ -3,6 +3,7 @@ package kr.co.smartsoft.finalproject_20220318
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.view.menu.MenuAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -63,6 +64,7 @@ class SearchUserActivity : BaseActivity() {
     }
 
     override fun setValues() {
+        imgAdd.visibility = View.GONE
         mAdapter = SerchRequestRecyclerAdapter(mContext, mSearchedUserList)
         binding.seachListRecyclerView.adapter = mAdapter
         binding.seachListRecyclerView.layoutManager = LinearLayoutManager(mContext)
