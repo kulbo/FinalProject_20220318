@@ -16,6 +16,7 @@ import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 class SignInActivity : BaseActivity() {
     lateinit var binding: ActivitySignInBinding
@@ -77,6 +78,9 @@ class SignInActivity : BaseActivity() {
                 }
 
             })
+//            2. 실제로 페북 로구인 실행
+//            골개 프로필 / 이메일 받아오자
+            LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "email"))
         }
         binding.btnKakaoLogin.setOnClickListener {
             getKakaoLogin()
