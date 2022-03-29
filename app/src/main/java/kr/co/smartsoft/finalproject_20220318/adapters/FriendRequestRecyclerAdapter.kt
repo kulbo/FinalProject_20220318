@@ -33,6 +33,7 @@ class FriendRequestRecyclerAdapter(
         val txtEmail = view.findViewById<TextView>(R.id.txtEmail)
         val btnAccept = view.findViewById<Button>(R.id.btnAccept)
         val btnDeny = view.findViewById<Button>(R.id.btnDeny)
+        val imgSocialLoginLogo = view.findViewById<ImageView>(R.id.imgSocialLoginLogo)
 
         fun bind(data: UserData) {
             Glide.with(mContext).load(data.profile_img).into(imgProfile)
@@ -41,19 +42,23 @@ class FriendRequestRecyclerAdapter(
             when (data.provider) {
                 "default" -> {
                     txtEmail.text = data.email
+                    imgSocialLoginLogo.visibility = View.GONE
                 }
                 "kakao" -> {
 //                "카카오로그인"
-                    imgProfile.setImageResource(R.drawable.kakao)
                     txtEmail.text = "카카오로그인"
+                    imgSocialLoginLogo.visibility = View.VISIBLE
+                    Glide.with(mContext).load(R.drawable.kakao).into(imgSocialLoginLogo)
                 }
                 "facebook" -> {
-                    imgProfile.setImageResource(R.drawable.facebook)
                     txtEmail.text = "페북 로그인"
+                    imgSocialLoginLogo.visibility = View.VISIBLE
+                    Glide.with(mContext).load(R.drawable.facebook).into(imgSocialLoginLogo)
                 }
                 "naver" -> {
-                    imgProfile.setImageResource(R.drawable.naver)
                     txtEmail.text = "네이버 로그인"
+                    imgSocialLoginLogo.visibility = View.VISIBLE
+                    Glide.with(mContext).load(R.drawable.naver).into(imgSocialLoginLogo)
                 }
                 else -> {
 //                그 외의 잘못된 경우.
