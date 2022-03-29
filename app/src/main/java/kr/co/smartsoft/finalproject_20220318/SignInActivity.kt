@@ -59,14 +59,10 @@ class SignInActivity : BaseActivity() {
                                         finish()
                                     }
                                 }
-
                                 override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
-
                                 }
-
                             })
                         }
-
                     })
 //                   싱크를 맞추도록 호출
                     graphRequest.executeAsync()
@@ -135,6 +131,13 @@ class SignInActivity : BaseActivity() {
     }
 
     override fun setValues() {
+
+        mCallbackManager = CallbackManager.Factory.create()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        mCallbackManager.onActivityResult(requestCode, resultCode, data)
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     fun getKakaoLogin(){
