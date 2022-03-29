@@ -9,6 +9,7 @@ import kr.co.smartsoft.finalproject_20220318.adapters.FrientViewPagerAdapter
 import kr.co.smartsoft.finalproject_20220318.databinding.ActivityManageFriendsBinding
 import kr.co.smartsoft.finalproject_20220318.databinding.FragmentMyFriendsBinding
 
+// 친구관리화면 보여주는 Activity
 class ManageFriendsActivity : BaseActivity() {
     lateinit var binding : ActivityManageFriendsBinding
 
@@ -27,6 +28,7 @@ class ManageFriendsActivity : BaseActivity() {
 //            val myIntent = Intent(mContext, SearchUserActivity::class.java)
 //            startActivity(myIntent)
 //        }
+        // ActionBar를 클릭하면 친구추가 화면으로 이동
         imgAdd.setOnClickListener {
             val myIntent = Intent(mContext, SearchUserActivity::class.java)
             startActivity(myIntent)
@@ -39,6 +41,7 @@ class ManageFriendsActivity : BaseActivity() {
         binding.viewFriends.adapter = mAdapter
         binding.tabFriends.setupWithViewPager(binding.viewFriends)
 
+        // 친구추가 버튼을 숨긴다.
         binding.btnAddFriend.visibility = View.GONE
 
     }
