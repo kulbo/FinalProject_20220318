@@ -309,7 +309,7 @@ class EditAppointmentActivity : BaseActivity() {
                 }
             }
 
-            val now = Calendar.getInstance()
+//            val now = Calendar.getInstance()
             val dpd = DatePickerDialog(
                 mContext,
                 dsl,
