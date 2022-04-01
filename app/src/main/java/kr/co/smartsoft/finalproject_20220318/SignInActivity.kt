@@ -108,6 +108,7 @@ class SignInActivity : BaseActivity() {
                     call: Call<BasicResponse>,
                     response: Response<BasicResponse>
                 ) {
+                    Log.d("로그인 설공", response.toString())
                     if (response.isSuccessful) {
                         val br = response.body()!!
                         Toast.makeText(mContext, "${br.data.user.nick_name}님 환영합니다.", Toast.LENGTH_SHORT).show()
@@ -124,7 +125,7 @@ class SignInActivity : BaseActivity() {
                 }
 
                 override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
-
+                    Log.d("로그인 실패", t.message.toString())
                 }
 
             })
