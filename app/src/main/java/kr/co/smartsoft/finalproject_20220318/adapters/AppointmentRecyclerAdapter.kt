@@ -4,9 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.smartsoft.finalproject_20220318.R
@@ -40,9 +42,28 @@ class AppointmentRecyclerAdapter(
                 mContext.startActivity(myIntent)
             }
 
+//            imgViewMap.setOnClickListener {
+//                popup(imgViewMap, data)
+//            }
+
         }
     }
 
+    fun popup(view: View, data : AppointmentData) {
+        val popup = PopupMenu(mContext, view)
+        popup.inflate(R.menu.popup_menu_for_appointment)
+        popup.setOnMenuItemClickListener ( { item: MenuItem? ->
+            when(item!!.itemId) {
+                R.id.menu_view -> {
+                    val myIntent = Intent(mContext, ViewMapActivity::class.java)
+                    myIntent.putExtra("appointment", data)
+                    mContext.startActivity(myIntent)
+                }
+            }
+            true
+        } )
+
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(mContext).inflate(R.layout.appointment_list_item, parent, false)
         return MyViewHolder(view)
@@ -58,3 +79,4 @@ class AppointmentRecyclerAdapter(
 
 
 }
+
