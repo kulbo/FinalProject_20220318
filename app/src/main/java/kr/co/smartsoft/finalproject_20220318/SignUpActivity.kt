@@ -54,6 +54,7 @@ class SignUpActivity : BaseActivity() {
             val inputEmail = binding.edtEmail.text.toString()
             val inputPassword = binding.edtPassword.text.toString()
             val inputNickName = binding.edtNickName.text.toString()
+            val inputPassword1 = binding.edtPassword1.text.toString()
 
             if (!isDupCheck) {
                 Toast.makeText(mContext, "이메일 중복확인을 해주세요", Toast.LENGTH_SHORT).show()
@@ -75,6 +76,10 @@ class SignUpActivity : BaseActivity() {
                 return@setOnClickListener
             }
 
+            if ( inputPassword != inputPassword1) {
+                Toast.makeText(mContext, "비밀번호와 비밀번호확인이 일치해야 합니다", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             apiList.putRequestSignUp(inputEmail, inputPassword, inputNickName).enqueue(object : Callback<BasicResponse>{
                 override fun onResponse(
                     call: Call<BasicResponse>,
