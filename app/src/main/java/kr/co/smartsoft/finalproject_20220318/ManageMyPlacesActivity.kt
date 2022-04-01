@@ -1,14 +1,11 @@
 package kr.co.smartsoft.finalproject_20220318
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import kr.co.smartsoft.finalproject_20220318.adapters.FrientViewPagerAdapter
 import kr.co.smartsoft.finalproject_20220318.adapters.MyPlacesRecyclerAdapter
-import kr.co.smartsoft.finalproject_20220318.adapters.SerchRequestRecyclerAdapter
 import kr.co.smartsoft.finalproject_20220318.databinding.ActivityManageMyPlacesBinding
 import kr.co.smartsoft.finalproject_20220318.datas.BasicResponse
 import kr.co.smartsoft.finalproject_20220318.datas.PlaceData

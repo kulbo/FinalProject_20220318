@@ -1,19 +1,17 @@
 package kr.co.smartsoft.finalproject_20220318
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
-import kr.co.smartsoft.finalproject_20220318.adapters.FrientViewPagerAdapter
+import kr.co.smartsoft.finalproject_20220318.adapters.FriendViewPagerAdapter
 import kr.co.smartsoft.finalproject_20220318.databinding.ActivityManageFriendsBinding
-import kr.co.smartsoft.finalproject_20220318.databinding.FragmentMyFriendsBinding
 
 // 친구관리화면 보여주는 Activity
 class ManageFriendsActivity : BaseActivity() {
     lateinit var binding : ActivityManageFriendsBinding
 
-    lateinit var mAdapter : FrientViewPagerAdapter
+    lateinit var mAdapter : FriendViewPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +35,7 @@ class ManageFriendsActivity : BaseActivity() {
     }
 
     override fun setValues() {
-        mAdapter = FrientViewPagerAdapter(supportFragmentManager)
+        mAdapter = FriendViewPagerAdapter(supportFragmentManager)
         binding.viewFriends.adapter = mAdapter
         binding.tabFriends.setupWithViewPager(binding.viewFriends)
 

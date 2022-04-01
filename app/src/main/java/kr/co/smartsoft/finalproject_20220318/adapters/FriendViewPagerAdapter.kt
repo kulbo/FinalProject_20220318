@@ -12,7 +12,7 @@ import kr.co.smartsoft.finalproject_20220318.fragments.MyProfileFragment
 import kr.co.smartsoft.finalproject_20220318.fragments.RequestedUsersFragment
 
 
-open class FrientViewPagerAdapter(fm : FragmentManager) : FragmentPagerAdapter(fm) {
+open class FriendViewPagerAdapter(fm : FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getCount() = 2
     override fun getItem(position: Int): Fragment {

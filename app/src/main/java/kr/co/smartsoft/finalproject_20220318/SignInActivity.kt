@@ -147,16 +147,14 @@ class SignInActivity : BaseActivity() {
     fun getKakaoLogin(){
 //        카카오로그인 가능한지 확인한다.
         if (UserApiClient.instance.isKakaoTalkLoginAvailable(mContext)) {
-            Log.d("카카오로그인", "카톡 앱으로 로그인")
             UserApiClient.instance.loginWithKakaoTalk(mContext) { token, error ->
-                Log.d("카카오로그인", "받아온 토큰 : ${token.toString()}")
+                Log.d("카카오톡 로그인", "받아온 토큰 : ${token.toString()}, ${error.toString()} ")
                 getKakaoUserInfo()
             }
         } else {
 //            카톡이 설치되지 않아 로구인 창을 뛰운다.
-            Log.d("카카오로그인", "카톡 앱없이 로그인")
             UserApiClient.instance.loginWithKakaoAccount(mContext) { token, error ->
-                Log.d("카카오로그인", "받아온 토큰 : ${token.toString()}")
+                Log.d("카카오로그인", "받아온 토큰 : ${token.toString()}, ${error.toString()}")
                 getKakaoUserInfo()
             }
         }
@@ -165,7 +163,7 @@ class SignInActivity : BaseActivity() {
     fun getKakaoUserInfo() {
         UserApiClient.instance.me { user, error ->
             user?.let {
-                Log.d("카카오로그인", "ID:${it.id!!.toString()}")
+                Log.d("카카오로그인", "ID:${it.id!!.toString()}, ${error.toString()}")
                 apiList.postRequestSocialLogin(
                     "kakao",
                     it.id!!.toString(),

@@ -147,7 +147,7 @@ class ViewMapActivity : BaseActivity() {
 //                        }
 //
 //                    }
-                    infoWindow.open(marker!!)
+                    infoWindow.open(marker)
                     val cameraFocus = CameraUpdate.scrollTo(LatLng(mAppointment.latitude, mAppointment.longitude))
                     naverMap!!.moveCamera(cameraFocus)
                 }
