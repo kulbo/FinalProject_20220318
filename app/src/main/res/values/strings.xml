@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FinalProject_20220318</string>
+    <string name="app_name">지킴이</string>
 
     <string name="facebook_app_id">250582057204519</string>
     <string name="fb_login_protocol_scheme">fb250582057204519</string>
