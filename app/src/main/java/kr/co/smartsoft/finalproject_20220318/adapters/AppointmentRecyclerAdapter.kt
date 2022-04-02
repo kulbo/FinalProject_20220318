@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.smartsoft.finalproject_20220318.R
 import kr.co.smartsoft.finalproject_20220318.ViewMapActivity
@@ -36,15 +37,30 @@ class AppointmentRecyclerAdapter(
             val sdf = SimpleDateFormat("yy년 M월 d일 a h시 m분")
             txtDateTime.text = sdf.format(data.datetime)
 
-            imgViewMap.setOnClickListener {
-                val myIntent = Intent(mContext, ViewMapActivity::class.java)
-                myIntent.putExtra("appointment", data)
-                mContext.startActivity(myIntent)
-            }
-
 //            imgViewMap.setOnClickListener {
-//                popup(imgViewMap, data)
+//                val myIntent = Intent(mContext, ViewMapActivity::class.java)
+//                myIntent.putExtra("appointment", data)
+//                mContext.startActivity(myIntent)
 //            }
+
+            imgViewMap.setOnClickListener {
+//                Log.d("팝업메뉴", R.menu.popup_menu_for_appointment.toString())
+//                Toast.makeText(mContext, "지도가 클릭되었습니다.", Toast.LENGTH_SHORT).show()
+//                popup(imgViewMap, data)
+                val popup = PopupMenu(mContext, imgViewMap)
+                popup.inflate(R.menu.popup_menu_for_appointment)
+                popup.show()
+                popup.setOnMenuItemClickListener ( { item: MenuItem? ->
+                    when(item!!.itemId) {
+                        R.id.menu_view -> {
+                            val myIntent = Intent(mContext, ViewMapActivity::class.java)
+                            myIntent.putExtra("appointment", data)
+                            mContext.startActivity(myIntent)
+                        }
+                    }
+                    true
+                } )
+            }
 
         }
     }
