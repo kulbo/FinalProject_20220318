@@ -3,7 +3,6 @@ package kr.co.smartsoft.finalproject_20220318.api
 import kr.co.smartsoft.finalproject_20220318.datas.BasicResponse
 import okhttp3.MultipartBody
 import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.http.*
 
 interface APIList {
@@ -100,4 +99,10 @@ interface APIList {
         @Field("uid") uid : String,
         @Field("nick_name") nick_name : String,
     ) : Call<BasicResponse>
+
+    @DELETE("/appointment")
+    fun deleteRequestAppointment(
+        @Query("appointment_id") id : Int
+    ) : Call<BasicResponse>
+
 }

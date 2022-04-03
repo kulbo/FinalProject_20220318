@@ -1,10 +1,8 @@
 package kr.co.smartsoft.finalproject_20220318
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.appcompat.view.menu.MenuAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import kr.co.smartsoft.finalproject_20220318.adapters.SerchRequestRecyclerAdapter
