@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProject_20220318">
         <activity
+            android:name=".ModifyAppointmentActivity"
+            android:exported="false" />
+        <activity
             android:name=".ViewMapActivity"
             android:exported="false" />
         <activity
@@ -49,7 +52,6 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" />
-
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
@@ -65,19 +67,19 @@
                     android:scheme="kakaod78ccb9e2ef5d58d8deda8b3c1ce266e" />
             </intent-filter>
         </activity>
-
-
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
         <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
@@ -85,14 +87,12 @@
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="2nzeq9tejv" />
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
         <meta-data
             android:name="com.facebook.sdk.ClientToken"
             android:value="@string/facebook_client_token" />
-
     </application>
 
 </manifest>

@@ -14,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
+import kr.co.smartsoft.finalproject_20220318.ModifyAppointmentActivity
 import kr.co.smartsoft.finalproject_20220318.R
 import kr.co.smartsoft.finalproject_20220318.ViewMapActivity
 import kr.co.smartsoft.finalproject_20220318.api.APIList
@@ -52,6 +53,7 @@ class AppointmentRecyclerAdapter(
         }
     }
 
+//    약속관리에서 지도 아이콘 클릭하면 팝업메뉴 표시부분
     fun popup(view: View, data : AppointmentData) {
         val popup = PopupMenu(mContext, view)
 
@@ -65,8 +67,8 @@ class AppointmentRecyclerAdapter(
                     mContext.startActivity(myIntent)
                 }
                 R.id.menu_edit -> {
-
-
+                    val myIntent = Intent(mContext, ModifyAppointmentActivity::class.java)
+                    mContext.startActivity(myIntent)
                 }
                 R.id.menu_delete -> {
                     val alert = AlertDialog.Builder(mContext)
