@@ -82,6 +82,7 @@ class ViewMapActivity : BaseActivity() {
         stationList.add( LatLng( mAppointment.start_latitude, mAppointment.start_longitude ) )
 
         val myODsayService = ODsayService.init(mContext, "5NFeRMEhquZ01oO58qPoNba4Y0GJA7417pu+DeUHWQI")
+//        val myODsayService = ODsayService.init(mContext, "@string/odsay_token")
         // 대중교통 길찾기 ODsay API 호출
         myODsayService.requestSearchPubTransPath(
             mAppointment.start_longitude.toString(),
