@@ -145,20 +145,6 @@ class EditAppointmentActivity : BaseActivity() {
             naverMap = it
 
             setMapView()
-//            val coord = LatLng( 37.577935237988264, 127.03360346916413)
-//            val cameraUpdate = CameraUpdate.scrollTo(coord)
-//            naverMap.moveCamera(cameraUpdate)
-//
-//            naverMap.setOnMapClickListener { pointF, latLng ->
-//                if (marker == null) {
-//                    marker = Marker()
-//                }
-//
-//                marker!!.position = latLng
-//                marker!!.map = naverMap
-//
-//                mSelectedLatLng = latLng
-//            }
         }
         getMyStartPlacesListFromServer()
         mStartPlaceAdapter = StartPlacesSpinnerAdapter(mContext, R.layout.start_place_spinner_list_item, mStartPlaceList)

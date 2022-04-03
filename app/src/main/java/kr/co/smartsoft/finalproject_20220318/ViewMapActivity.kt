@@ -28,7 +28,6 @@ class ViewMapActivity : BaseActivity() {
     lateinit var mAppointment : AppointmentData
 
     var sMarker : Marker? = null
-    var marker : Marker? = null
 
     var path: PathOverlay? = null
     var naverMap : NaverMap? = null
@@ -46,17 +45,16 @@ class ViewMapActivity : BaseActivity() {
     }
 
     override fun setValues() {
-
 //        ActionBar의 문구를 변경
         txtTitle.text = "약속장소 지도 확인"
         imgAdd.visibility = View.GONE
 
         binding.naverMapView.getMapAsync {
             naverMap = it
-
             setMapView()
         }
     }
+
     fun setMapView() {
         val sLat = mAppointment.start_latitude
         val sLog = mAppointment.start_longitude
@@ -118,7 +116,7 @@ class ViewMapActivity : BaseActivity() {
                     }
                     stationList.add(LatLng(mAppointment.latitude, mAppointment.longitude))                // 도착지를 경로에 추가
                     path = PathOverlay()
-                    path!!.coords = stationList           // path애 정류장정보를 지정
+                    path!!.coords = stationList                 // path애 정류장정보를 지정
                     path!!.map = naverMap                       // 지도에 표시
 
                     val infoObj = firstPathObj.getJSONObject("info")    // 요약정보를 가져온다.
@@ -139,23 +137,13 @@ class ViewMapActivity : BaseActivity() {
 
                             return view
                         }
-
                     }
-//                    infoWindow.adapter = object : InfoWindow.DefaultTextAdapter(mContext) {
-//                        override fun getText(p0: InfoWindow): CharSequence {
-//                            return "이동시간 : ${totalTime}분, 비용 ${payment}원"
-//                        }
-//
-//                    }
                     infoWindow.open(marker)
                     val cameraFocus = CameraUpdate.scrollTo(LatLng(mAppointment.latitude, mAppointment.longitude))
                     naverMap!!.moveCamera(cameraFocus)
                 }
-
                 override fun onError(p0: Int, p1: String?, p2: API?) {
-
                 }
-
             }
         )
     }
