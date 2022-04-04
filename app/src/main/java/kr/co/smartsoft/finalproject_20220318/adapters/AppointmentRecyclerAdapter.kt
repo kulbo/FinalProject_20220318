@@ -68,6 +68,7 @@ class AppointmentRecyclerAdapter(
                 }
                 R.id.menu_edit -> {
                     val myIntent = Intent(mContext, ModifyAppointmentActivity::class.java)
+                    myIntent.putExtra("appointment", data)
                     mContext.startActivity(myIntent)
                 }
                 R.id.menu_delete -> {
