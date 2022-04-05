@@ -19,6 +19,7 @@ import com.odsay.odsayandroidsdk.ODsayService
 import com.odsay.odsayandroidsdk.OnResultCallbackListener
 import kr.co.smartsoft.finalproject_20220318.databinding.ActivityModifyAppointmentBinding
 import kr.co.smartsoft.finalproject_20220318.datas.AppointmentData
+import java.text.SimpleDateFormat
 
 class ModifyAppointmentActivity : BaseActivity() {
     lateinit var binding : ActivityModifyAppointmentBinding
@@ -43,6 +44,13 @@ class ModifyAppointmentActivity : BaseActivity() {
         imgAdd.visibility = View.GONE           // ActionBar 의 플러스 버튼 보이지 않도록
         binding.txtTitle.text = mAppointment.title
 
+        val sdf = SimpleDateFormat("yyyy-MM-dd")
+        val stf = SimpleDateFormat("HH:mm")
+        val sdt = sdf.format(mAppointment.datetime)
+        val stt = stf.format(mAppointment.datetime)
+        binding.txtDate.text = sdt.toString()
+        binding.txtTime.text = stt.toString()
+
         binding.imgViewMap.getMapAsync {
             naverMap = it
             setMapView()
@@ -66,6 +74,8 @@ class ModifyAppointmentActivity : BaseActivity() {
         val destLatLng = LatLng(mAppointment.latitude, mAppointment.longitude)
         val cameraUpdate = CameraUpdate.scrollTo(destLatLng)
         naverMap!!.moveCamera(cameraUpdate)
+
+
 
         val marker = Marker()
         marker.position = destLatLng
