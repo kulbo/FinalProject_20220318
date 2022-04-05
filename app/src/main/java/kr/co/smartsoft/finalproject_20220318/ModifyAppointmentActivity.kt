@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.EditText
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import com.naver.maps.geometry.LatLng
@@ -50,6 +51,8 @@ class ModifyAppointmentActivity : BaseActivity() {
         val stt = stf.format(mAppointment.datetime)
         binding.txtDate.text = sdt.toString()
         binding.txtTime.text = stt.toString()
+        // EditText 속성에 대해서 텍스트를 변경하려먼 아래와 같이 수정해주어야 한다.
+        binding.edtPlaceName.setText("${mAppointment.place}")
 
         binding.imgViewMap.getMapAsync {
             naverMap = it
