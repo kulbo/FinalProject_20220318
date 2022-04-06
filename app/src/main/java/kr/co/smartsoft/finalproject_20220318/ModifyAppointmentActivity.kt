@@ -18,8 +18,14 @@ import com.odsay.odsayandroidsdk.API
 import com.odsay.odsayandroidsdk.ODsayData
 import com.odsay.odsayandroidsdk.ODsayService
 import com.odsay.odsayandroidsdk.OnResultCallbackListener
+import kr.co.smartsoft.finalproject_20220318.adapters.StartPlacesSpinnerAdapter
 import kr.co.smartsoft.finalproject_20220318.databinding.ActivityModifyAppointmentBinding
 import kr.co.smartsoft.finalproject_20220318.datas.AppointmentData
+import kr.co.smartsoft.finalproject_20220318.datas.BasicResponse
+import kr.co.smartsoft.finalproject_20220318.datas.PlaceData
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.SimpleDateFormat
 
 class ModifyAppointmentActivity : BaseActivity() {
@@ -28,6 +34,8 @@ class ModifyAppointmentActivity : BaseActivity() {
     var sMarker : Marker? = null
     var path: PathOverlay? = null
     var naverMap : NaverMap? = null
+    val mStartPlaceList = ArrayList<PlaceData>()
+    lateinit var mStartPlaceAdapter: StartPlacesSpinnerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,10 +62,32 @@ class ModifyAppointmentActivity : BaseActivity() {
         // EditText 속성에 대해서 텍스트를 변경하려먼 아래와 같이 수정해주어야 한다.
         binding.edtPlaceName.setText("${mAppointment.place}")
 
+        getMyStartPlacesListFromServer()
+        mStartPlaceAdapter = StartPlacesSpinnerAdapter(mContext, R.layout.start_place_spinner_list_item, mStartPlaceList)
+        binding.spiStartPlace.adapter = mStartPlaceAdapter
+
         binding.imgViewMap.getMapAsync {
             naverMap = it
             setMapView()
         }
+    }
+
+    fun getMyStartPlacesListFromServer() {
+        apiList.getRequestMyPlacesList().enqueue(object : Callback<BasicResponse> {
+            override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+                if (response.isSuccessful) {
+                    var br = response.body()!!
+                    mStartPlaceList.clear()
+                    mStartPlaceList.addAll(br.data.places)
+                    mStartPlaceAdapter.notifyDataSetChanged()
+                }
+            }
+
+            override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+            }
+
+        })
     }
 
     fun setMapView() {
@@ -73,12 +103,9 @@ class ModifyAppointmentActivity : BaseActivity() {
 
     //    길 찾기 함수
     fun findWay() {
-
         val destLatLng = LatLng(mAppointment.latitude, mAppointment.longitude)
         val cameraUpdate = CameraUpdate.scrollTo(destLatLng)
         naverMap!!.moveCamera(cameraUpdate)
-
-
 
         val marker = Marker()
         marker.position = destLatLng
