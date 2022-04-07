@@ -263,7 +263,7 @@ class ModifyAppointmentActivity : BaseActivity() {
                             val txtDataTime = view.findViewById<TextView>(R.id.txtDateTime)
                             val txtPayment = view.findViewById<TextView>(R.id.txtPayment)
 
-                            txtPlaceName.text = mAppointment.place
+                            txtPlaceName.text = binding.edtPlaceName.toString()
                             txtDataTime.text = "${totalTime}분 소요"
                             txtPayment.text = "${payment}원 필요"
 
