@@ -2,15 +2,14 @@ package kr.co.smartsoft.finalproject_20220318
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.DatePicker
-import android.widget.EditText
 import android.widget.TextView
 import android.widget.TimePicker
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
@@ -32,11 +31,11 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 class ModifyAppointmentActivity : BaseActivity() {
     lateinit var binding : ActivityModifyAppointmentBinding
     lateinit var mAppointment : AppointmentData
+    var mSelectedDateTime = Calendar.getInstance() // 기본값 : 현재일시를 가져온다.
     var sMarker : Marker? = null
     var path: PathOverlay? = null
     var naverMap : NaverMap? = null
@@ -56,6 +55,62 @@ class ModifyAppointmentActivity : BaseActivity() {
     override fun setUpEvents() {
 
         setDateTime()
+
+        binding.btnAppointSave.setOnClickListener {
+            val edtTitle = mAppointment.title
+            val edtPlace = binding.edtPlaceName.text.toString()
+            val txtDate = binding.txtDate.text.toString()
+            val txtTime = binding.txtTime.text.toString()
+
+            if (edtPlace == "") {
+                Toast.makeText(mContext, "약속 장소를 입력해 주세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if (txtDate == "약속 일자") {
+                Toast.makeText(mContext, "약속 일자를 선택해 주세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            if (txtTime == "약속 시간") {
+                Toast.makeText(mContext, "약속 시간을 선택해 주세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (mSelectedLatLng == null) {
+                Toast.makeText(mContext, "약속 장소를 선택하지 않았습니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            val stPlace = mStartPlaceList[binding.spiStartPlace.selectedItemPosition]
+
+            val now = Calendar.getInstance()
+            if (mSelectedDateTime.timeInMillis < now.timeInMillis) {
+                Toast.makeText(mContext, "현재 이후의 시간으로 선택해주세요.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            val lat = mSelectedLatLng!!.latitude
+            val lon = mSelectedLatLng!!.longitude
+            Log.d("선택한약속장소 - 위도", "위도 : ${lat.toString()}")
+            Log.d("선택한약속장소 - 경도", "경도 : ${lon.toString()}")
+
+            val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
+            val sdt = sdf.format(mSelectedDateTime.time)
+
+            apiList.putRequestAppointmentModify(
+                mAppointment.id, edtTitle, sdt, stPlace.name, stPlace.latitude, stPlace.longitude, edtPlace, lat, lon
+            ).enqueue(object : Callback<BasicResponse>{
+                override fun onResponse(
+                    call: Call<BasicResponse>,
+                    response: Response<BasicResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(mContext, "약속이 수정되었습니다.", Toast.LENGTH_SHORT).show()
+                        finish()
+                    }
+                }
+                override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+                }
+            })
+        }
     }
 
     override fun setValues() {
@@ -74,6 +129,8 @@ class ModifyAppointmentActivity : BaseActivity() {
         getMyStartPlacesListFromServer()
         mStartPlaceAdapter = StartPlacesSpinnerAdapter(mContext, R.layout.start_place_spinner_list_item, mStartPlaceList)
         binding.spiStartPlace.adapter = mStartPlaceAdapter
+
+        mSelectedLatLng = LatLng(mAppointment.latitude, mAppointment.longitude)
 
         binding.imgViewMap.getMapAsync {
             naverMap = it
@@ -110,11 +167,25 @@ class ModifyAppointmentActivity : BaseActivity() {
             override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
 
             }
-
         })
     }
     fun setDateTime() {
-        var mSelectedDateTime = Calendar.getInstance() // 기본값 : 현재일시를 가져온다.
+//        mSelectedDateTime = Calendar.getInstance() // 기본값 : 현재일시를 가져온다.
+        var sdf = SimpleDateFormat("yyyy")
+        val year = sdf.format(mAppointment.datetime).toInt()
+        sdf = SimpleDateFormat("MM")
+        val month = sdf.format(mAppointment.datetime).toInt()-1
+        sdf = SimpleDateFormat("dd")
+        val day = sdf.format(mAppointment.datetime).toInt()
+        Log.d("년도, 달, 일", "${year}, ${month}, ${day}")
+        sdf = SimpleDateFormat("hh")
+        val hour = sdf.format(mAppointment.datetime).toInt()
+        sdf = SimpleDateFormat("mm")
+        val minute = sdf.format(mAppointment.datetime).toInt()
+        mSelectedDateTime.set(year, month, day)
+        mSelectedDateTime.set(Calendar.HOUR_OF_DAY, hour)
+        mSelectedDateTime.set(Calendar.MINUTE, minute)
+
         binding.txtDate.setOnClickListener {
             val dsl = object : DatePickerDialog.OnDateSetListener {
                 override fun onDateSet(p0: DatePicker?, year: Int, month: Int, day: Int) {
@@ -125,13 +196,6 @@ class ModifyAppointmentActivity : BaseActivity() {
             }
 
 //            val now = Calendar.getInstance()
-            var sdf = SimpleDateFormat("yyyy")
-            val year = sdf.format(mAppointment.datetime).toInt()
-            sdf = SimpleDateFormat("MM")
-            val month = sdf.format(mAppointment.datetime).toInt()-1
-            sdf = SimpleDateFormat("dd")
-            val day = sdf.format(mAppointment.datetime).toInt()
-            Log.d("년도, 달, 일", "${year}, ${month}, ${day}")
             val dpd = DatePickerDialog(
                 mContext, dsl, year, month, day,
             ).show()
@@ -146,10 +210,6 @@ class ModifyAppointmentActivity : BaseActivity() {
                     binding.txtTime.text = sdf.format(mSelectedDateTime.time)
                 }
             }
-            var sdf = SimpleDateFormat("hh")
-            val hour = sdf.format(mAppointment.datetime).toInt()
-            sdf = SimpleDateFormat("mm")
-            val minute = sdf.format(mAppointment.datetime).toInt()
             val tpd = TimePickerDialog(
                 mContext,
                 tsl,

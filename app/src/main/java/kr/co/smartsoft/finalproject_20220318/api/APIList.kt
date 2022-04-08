@@ -105,4 +105,19 @@ interface APIList {
         @Query("appointment_id") id : Int
     ) : Call<BasicResponse>
 
+    //    회원가입하기
+    @FormUrlEncoded
+    @PUT("/appointment")
+    fun putRequestAppointmentModify(
+        @Field("appointment_id") id: Int,
+        @Field("title") title: String,
+        @Field("datetime") datetime: String,    // yyyy-MM-dd HH:mm
+        @Field("start_place") splace: String,
+        @Field("start_latitude") slat: Double,
+        @Field("start_longitude") slon: Double,
+        @Field("place") place: String,
+        @Field("latitude") lat: Double,
+        @Field("longitude") lon: Double,
+    ) : Call<BasicResponse>
+
 }
