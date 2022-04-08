@@ -1,12 +1,16 @@
 package kr.co.smartsoft.finalproject_20220318
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.TimePicker
 import androidx.databinding.DataBindingUtil
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
@@ -27,6 +31,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ModifyAppointmentActivity : BaseActivity() {
     lateinit var binding : ActivityModifyAppointmentBinding
@@ -49,6 +55,7 @@ class ModifyAppointmentActivity : BaseActivity() {
 
     override fun setUpEvents() {
 
+        setDateTime()
     }
 
     override fun setValues() {
@@ -106,6 +113,52 @@ class ModifyAppointmentActivity : BaseActivity() {
 
         })
     }
+    fun setDateTime() {
+        var mSelectedDateTime = Calendar.getInstance() // 기본값 : 현재일시를 가져온다.
+        binding.txtDate.setOnClickListener {
+            val dsl = object : DatePickerDialog.OnDateSetListener {
+                override fun onDateSet(p0: DatePicker?, year: Int, month: Int, day: Int) {
+                    mSelectedDateTime.set(year, month, day)
+                    val sdf = SimpleDateFormat("yy/MM/dd")
+                    binding.txtDate.text = sdf.format(mSelectedDateTime.time)
+                }
+            }
+
+//            val now = Calendar.getInstance()
+            var sdf = SimpleDateFormat("yyyy")
+            val year = sdf.format(mAppointment.datetime).toInt()
+            sdf = SimpleDateFormat("MM")
+            val month = sdf.format(mAppointment.datetime).toInt()-1
+            sdf = SimpleDateFormat("dd")
+            val day = sdf.format(mAppointment.datetime).toInt()
+            Log.d("년도, 달, 일", "${year}, ${month}, ${day}")
+            val dpd = DatePickerDialog(
+                mContext, dsl, year, month, day,
+            ).show()
+        }
+
+        binding.txtTime.setOnClickListener {
+            val tsl = object : TimePickerDialog.OnTimeSetListener{
+                override fun onTimeSet(p0: TimePicker?, hour: Int, minute: Int) {
+                    mSelectedDateTime.set(Calendar.HOUR_OF_DAY, hour)
+                    mSelectedDateTime.set(Calendar.MINUTE, minute)
+                    val sdf = SimpleDateFormat("a h시 m분")
+                    binding.txtTime.text = sdf.format(mSelectedDateTime.time)
+                }
+            }
+            var sdf = SimpleDateFormat("hh")
+            val hour = sdf.format(mAppointment.datetime).toInt()
+            sdf = SimpleDateFormat("mm")
+            val minute = sdf.format(mAppointment.datetime).toInt()
+            val tpd = TimePickerDialog(
+                mContext,
+                tsl,
+                hour,
+                minute,
+                false
+            ).show()
+        }
+    }
 
     fun setMapView() {
         val sLat = mAppointment.start_latitude
@@ -145,9 +198,7 @@ class ModifyAppointmentActivity : BaseActivity() {
             object: OnResultCallbackListener {
                 override fun onSuccess(p0: ODsayData?, p1: API?) {
                     val jsonObj = p0!!.json!!
-                    Log.d("길찾기 응답", jsonObj.toString())
                     val resultObj = jsonObj.getJSONObject("result")
-                    Log.d("resultObj", resultObj.toString())
                     val pathArr = resultObj.getJSONArray("path")    // 1-9 추천경로들을 pathArr로 지정
                     val firstPathObj = pathArr.getJSONObject(0)     // 첫번째 추천 경로만 받아온다.
 //                    출발지 좌표를 정거장 목록에 추가
@@ -226,9 +277,9 @@ class ModifyAppointmentActivity : BaseActivity() {
             object: OnResultCallbackListener {
                 override fun onSuccess(p0: ODsayData?, p1: API?) {
                     val jsonObj = p0!!.json!!
-                    Log.d("길찾기 응답", jsonObj.toString())
+//                    Log.d("길찾기 응답", jsonObj.toString())
                     val resultObj = jsonObj.getJSONObject("result")
-                    Log.d("resultObj", resultObj.toString())
+//                    Log.d("resultObj", resultObj.toString())
                     val pathArr = resultObj.getJSONArray("path")    // 1-9 추천경로들을 pathArr로 지정
                     val firstPathObj = pathArr.getJSONObject(0)     // 첫번째 추천 경로만 받아온다.
 //                    출발지 좌표를 정거장 목록에 추가
