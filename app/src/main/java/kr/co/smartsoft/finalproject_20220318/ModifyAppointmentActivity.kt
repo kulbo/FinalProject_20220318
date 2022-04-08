@@ -79,7 +79,10 @@ class ModifyAppointmentActivity : BaseActivity() {
                 Toast.makeText(mContext, "약속 장소를 선택하지 않았습니다.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            val stPlace = mStartPlaceList[binding.spiStartPlace.selectedItemPosition]
+            //val stPlace = mStartPlaceList[binding.spiStartPlace.selectedItemPosition]
+            val stPlace = mAppointment.start_place
+            val stLon = mAppointment.longitude
+            val stLat = mAppointment.latitude
 
             val now = Calendar.getInstance()
             if (mSelectedDateTime.timeInMillis < now.timeInMillis) {
@@ -96,7 +99,7 @@ class ModifyAppointmentActivity : BaseActivity() {
             val sdt = sdf.format(mSelectedDateTime.time)
 
             apiList.putRequestAppointmentModify(
-                mAppointment.id, edtTitle, sdt, stPlace.name, stPlace.latitude, stPlace.longitude, edtPlace, lat, lon
+                mAppointment.id, edtTitle, sdt, stPlace, stLat, stLon, edtPlace, lat, lon
             ).enqueue(object : Callback<BasicResponse>{
                 override fun onResponse(
                     call: Call<BasicResponse>,
