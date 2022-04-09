@@ -81,8 +81,8 @@ class ModifyAppointmentActivity : BaseActivity() {
             }
             //val stPlace = mStartPlaceList[binding.spiStartPlace.selectedItemPosition]
             val stPlace = mAppointment.start_place
-            val stLon = mAppointment.longitude
-            val stLat = mAppointment.latitude
+            val stLon = mAppointment.start_longitude
+            val stLat = mAppointment.start_latitude
 
             val now = Calendar.getInstance()
             if (mSelectedDateTime.timeInMillis < now.timeInMillis) {
@@ -181,7 +181,7 @@ class ModifyAppointmentActivity : BaseActivity() {
         sdf = SimpleDateFormat("dd")
         val day = sdf.format(mAppointment.datetime).toInt()
         Log.d("년도, 달, 일", "${year}, ${month}, ${day}")
-        sdf = SimpleDateFormat("hh")
+        sdf = SimpleDateFormat("HH")
         val hour = sdf.format(mAppointment.datetime).toInt()
         sdf = SimpleDateFormat("mm")
         val minute = sdf.format(mAppointment.datetime).toInt()
