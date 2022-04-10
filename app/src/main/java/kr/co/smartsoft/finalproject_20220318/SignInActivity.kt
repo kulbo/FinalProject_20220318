@@ -3,6 +3,7 @@ package kr.co.smartsoft.finalproject_20220318
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.facebook.*
@@ -126,6 +127,7 @@ class SignInActivity : BaseActivity() {
 
                 override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
                     Log.d("로그인 실패", t.message.toString())
+                    Toast.makeText(mContext, "로그인 실패(${t.message.toString()}", Toast.LENGTH_SHORT).show()
                 }
 
             })
@@ -136,6 +138,7 @@ class SignInActivity : BaseActivity() {
 
     override fun setValues() {
 
+        imgAdd.visibility = View.GONE       // Action bar 보이지 않도록
         mCallbackManager = CallbackManager.Factory.create()
     }
 

@@ -210,9 +210,9 @@ class EditAppointmentActivity : BaseActivity() {
             object: OnResultCallbackListener {
                 override fun onSuccess(p0: ODsayData?, p1: API?) {
                     val jsonObj = p0!!.json!!
-                    Log.d("길찾기 응답", jsonObj.toString())
+//                    Log.d("길찾기 응답", jsonObj.toString())
                     val resultObj = jsonObj.getJSONObject("result")
-                    Log.d("resultObj", resultObj.toString())
+//                    Log.d("resultObj", resultObj.toString())
                     val pathArr = resultObj.getJSONArray("path")    // 1-9 추천경로들을 pathArr로 지정
                     val firstPathObj = pathArr.getJSONObject(0)     // 첫번째 추천 경로만 받아온다.
                     val stationLatLngList = ArrayList<LatLng>()
