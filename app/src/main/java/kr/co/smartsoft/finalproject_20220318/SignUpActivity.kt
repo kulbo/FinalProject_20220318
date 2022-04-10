@@ -1,6 +1,7 @@
 package kr.co.smartsoft.finalproject_20220318
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import kr.co.smartsoft.finalproject_20220318.databinding.ActivitySignUpBinding
@@ -24,7 +25,9 @@ class SignUpActivity : BaseActivity() {
     override fun setUpEvents() {
 
         var isDupCheck = false
+        var isNickDupCheck = false
 
+//            이메일 중복체크
         binding.btnDupCheck.setOnClickListener{
             val inputEmail = binding.edtEmail.text.toString()
 
@@ -50,6 +53,30 @@ class SignUpActivity : BaseActivity() {
             })
         }
 
+//        닉네임 중복체크 처리
+        binding.btnNickDupCheck.setOnClickListener {
+            val inputNickName = binding.edtNickName.text.toString()
+
+            apiList.getDupulicateCheck("NICK_NAME", inputNickName).enqueue(object : Callback<BasicResponse>{
+                override fun onResponse(
+                    call: Call<BasicResponse>,
+                    response: Response<BasicResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        isNickDupCheck = true
+                        Toast.makeText(mContext, "사용해도 좋은 닉네임입니다.", Toast.LENGTH_SHORT).show()
+                    }
+                    else{
+                        Toast.makeText(mContext, "다른 닉네임을 사용하세요.", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+
+                }
+
+            })
+        }
+
         binding.btnSignUp.setOnClickListener {
             val inputEmail = binding.edtEmail.text.toString()
             val inputPassword = binding.edtPassword.text.toString()
@@ -58,6 +85,11 @@ class SignUpActivity : BaseActivity() {
 
             if (!isDupCheck) {
                 Toast.makeText(mContext, "이메일 중복확인을 해주세요", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (!isNickDupCheck) {
+                Toast.makeText(mContext, "닉네임 중복확인을 해주세요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -76,7 +108,7 @@ class SignUpActivity : BaseActivity() {
                 return@setOnClickListener
             }
 
-            if ( inputPassword != inputPassword1) {
+            if (inputPassword != inputPassword1) {
                 Toast.makeText(mContext, "비밀번호와 비밀번호확인이 일치해야 합니다", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -103,5 +135,7 @@ class SignUpActivity : BaseActivity() {
 
     override fun setValues() {
         ContextUtil.setLoginUserToken(mContext, "")
+
+        imgAdd.visibility = View.GONE       // Action Bar의 + 버튼 보이지 않게
     }
 }
