@@ -121,7 +121,7 @@ class ModifyAppointmentActivity : BaseActivity() {
         binding.txtTitle.text = mAppointment.title
 
         val sdf = SimpleDateFormat("yy/MM/dd")
-        val stf = SimpleDateFormat("a H시 m분")
+        val stf = SimpleDateFormat("a h시 m분")
         val sdt = sdf.format(mAppointment.datetime)
         val stt = stf.format(mAppointment.datetime)
         binding.txtDate.text = sdt.toString()
@@ -181,12 +181,16 @@ class ModifyAppointmentActivity : BaseActivity() {
         sdf = SimpleDateFormat("dd")
         val day = sdf.format(mAppointment.datetime).toInt()
         Log.d("년도, 달, 일", "${year}, ${month}, ${day}")
-        sdf = SimpleDateFormat("HH")
+//        sdf = SimpleDateFormat("HH")          // 12시 단위로 가져오기 위해
+        sdf = SimpleDateFormat("h")         // 12시간 단위로 가져온다.
         val hour = sdf.format(mAppointment.datetime).toInt()
+        sdf = SimpleDateFormat("a")
+        val am = sdf.format(mAppointment.datetime)
         sdf = SimpleDateFormat("mm")
         val minute = sdf.format(mAppointment.datetime).toInt()
         mSelectedDateTime.set(year, month, day)
         mSelectedDateTime.set(Calendar.HOUR_OF_DAY, hour)
+//        mSelectedDateTime.set(Calendar.AM, am)
         mSelectedDateTime.set(Calendar.MINUTE, minute)
 
         binding.txtDate.setOnClickListener {
@@ -208,6 +212,7 @@ class ModifyAppointmentActivity : BaseActivity() {
             val tsl = object : TimePickerDialog.OnTimeSetListener{
                 override fun onTimeSet(p0: TimePicker?, hour: Int, minute: Int) {
                     mSelectedDateTime.set(Calendar.HOUR_OF_DAY, hour)
+                    Log.d("시간","${hour.toString()}")
                     mSelectedDateTime.set(Calendar.MINUTE, minute)
                     val sdf = SimpleDateFormat("a h시 m분")
                     binding.txtTime.text = sdf.format(mSelectedDateTime.time)
